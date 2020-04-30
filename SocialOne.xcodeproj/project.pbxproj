@@ -3,13 +3,21 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		64AFAFA35D575DE691B4D428 /* Pods_SocialOne.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50AD2755599EDF7DD2BFB3AC /* Pods_SocialOne.framework */; };
+		6DE282C624541E140000ACA5 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE282C524541E140000ACA5 /* RegisterViewController.swift */; };
+		6DE282C824541ED00000ACA5 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE282C724541ED00000ACA5 /* FeedViewController.swift */; };
+		6DE282CA24541EEB0000ACA5 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE282C924541EEB0000ACA5 /* ProfileViewController.swift */; };
+		6DE282CE24547B4C0000ACA5 /* TwitterAPICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE282CD24547B4C0000ACA5 /* TwitterAPICaller.swift */; };
+		6DE282D1245536BF0000ACA5 /* TwitterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE282D0245536BF0000ACA5 /* TwitterCollectionViewCell.swift */; };
+		6DE282D3245537050000ACA5 /* InstagramCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE282D2245537050000ACA5 /* InstagramCollectionViewCell.swift */; };
+		6DE282D5245537340000ACA5 /* FacebookCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE282D4245537340000ACA5 /* FacebookCollectionViewCell.swift */; };
 		6DE4D1B3244C0D9000DC82B7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE4D1B2244C0D9000DC82B7 /* AppDelegate.swift */; };
 		6DE4D1B5244C0D9000DC82B7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE4D1B4244C0D9000DC82B7 /* SceneDelegate.swift */; };
-		6DE4D1B7244C0D9000DC82B7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE4D1B6244C0D9000DC82B7 /* ViewController.swift */; };
+		6DE4D1B7244C0D9000DC82B7 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE4D1B6244C0D9000DC82B7 /* LoginViewController.swift */; };
 		6DE4D1BA244C0D9000DC82B7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6DE4D1B8244C0D9000DC82B7 /* Main.storyboard */; };
 		6DE4D1BD244C0D9000DC82B7 /* SocialOne.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6DE4D1BB244C0D9000DC82B7 /* SocialOne.xcdatamodeld */; };
 		6DE4D1BF244C0D9500DC82B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6DE4D1BE244C0D9500DC82B7 /* Assets.xcassets */; };
@@ -17,15 +25,25 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		09B62CA78BC77BE4118261FC /* Pods-SocialOne.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialOne.release.xcconfig"; path = "Target Support Files/Pods-SocialOne/Pods-SocialOne.release.xcconfig"; sourceTree = "<group>"; };
+		50AD2755599EDF7DD2BFB3AC /* Pods_SocialOne.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SocialOne.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6DE282C524541E140000ACA5 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		6DE282C724541ED00000ACA5 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
+		6DE282C924541EEB0000ACA5 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		6DE282CD24547B4C0000ACA5 /* TwitterAPICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitterAPICaller.swift; sourceTree = "<group>"; };
+		6DE282D0245536BF0000ACA5 /* TwitterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitterCollectionViewCell.swift; sourceTree = "<group>"; };
+		6DE282D2245537050000ACA5 /* InstagramCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramCollectionViewCell.swift; sourceTree = "<group>"; };
+		6DE282D4245537340000ACA5 /* FacebookCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookCollectionViewCell.swift; sourceTree = "<group>"; };
 		6DE4D1AF244C0D9000DC82B7 /* SocialOne.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SocialOne.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DE4D1B2244C0D9000DC82B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6DE4D1B4244C0D9000DC82B7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		6DE4D1B6244C0D9000DC82B7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		6DE4D1B6244C0D9000DC82B7 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		6DE4D1B9244C0D9000DC82B7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6DE4D1BC244C0D9000DC82B7 /* SocialOne.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SocialOne.xcdatamodel; sourceTree = "<group>"; };
 		6DE4D1BE244C0D9500DC82B7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6DE4D1C1244C0D9500DC82B7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6DE4D1C3244C0D9500DC82B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C1B80C8D620715D2662D582F /* Pods-SocialOne.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialOne.debug.xcconfig"; path = "Target Support Files/Pods-SocialOne/Pods-SocialOne.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,17 +51,45 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				64AFAFA35D575DE691B4D428 /* Pods_SocialOne.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4E9FA2C3F222C54E060A263C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C1B80C8D620715D2662D582F /* Pods-SocialOne.debug.xcconfig */,
+				09B62CA78BC77BE4118261FC /* Pods-SocialOne.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		5EDB1E81DE642EF3E37295F1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				50AD2755599EDF7DD2BFB3AC /* Pods_SocialOne.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6DE282CF24547B5C0000ACA5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6DE282CD24547B4C0000ACA5 /* TwitterAPICaller.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		6DE4D1A6244C0D8F00DC82B7 = {
 			isa = PBXGroup;
 			children = (
 				6DE4D1B1244C0D9000DC82B7 /* SocialOne */,
 				6DE4D1B0244C0D9000DC82B7 /* Products */,
+				4E9FA2C3F222C54E060A263C /* Pods */,
+				5EDB1E81DE642EF3E37295F1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -60,14 +106,37 @@
 			children = (
 				6DE4D1B2244C0D9000DC82B7 /* AppDelegate.swift */,
 				6DE4D1B4244C0D9000DC82B7 /* SceneDelegate.swift */,
-				6DE4D1B6244C0D9000DC82B7 /* ViewController.swift */,
-				6DE4D1B8244C0D9000DC82B7 /* Main.storyboard */,
+				6DE282CF24547B5C0000ACA5 /* Model */,
+				6DE4D1C9244C124F00DC82B7 /* Controller */,
+				6DE4D1CA244C125C00DC82B7 /* View */,
 				6DE4D1BE244C0D9500DC82B7 /* Assets.xcassets */,
 				6DE4D1C0244C0D9500DC82B7 /* LaunchScreen.storyboard */,
 				6DE4D1C3244C0D9500DC82B7 /* Info.plist */,
 				6DE4D1BB244C0D9000DC82B7 /* SocialOne.xcdatamodeld */,
 			);
 			path = SocialOne;
+			sourceTree = "<group>";
+		};
+		6DE4D1C9244C124F00DC82B7 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				6DE4D1B6244C0D9000DC82B7 /* LoginViewController.swift */,
+				6DE282C524541E140000ACA5 /* RegisterViewController.swift */,
+				6DE282C724541ED00000ACA5 /* FeedViewController.swift */,
+				6DE282C924541EEB0000ACA5 /* ProfileViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		6DE4D1CA244C125C00DC82B7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6DE4D1B8244C0D9000DC82B7 /* Main.storyboard */,
+				6DE282D0245536BF0000ACA5 /* TwitterCollectionViewCell.swift */,
+				6DE282D2245537050000ACA5 /* InstagramCollectionViewCell.swift */,
+				6DE282D4245537340000ACA5 /* FacebookCollectionViewCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -77,9 +146,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6DE4D1C6244C0D9500DC82B7 /* Build configuration list for PBXNativeTarget "SocialOne" */;
 			buildPhases = (
+				940BA694C2EF790490DB7526 /* [CP] Check Pods Manifest.lock */,
 				6DE4D1AB244C0D9000DC82B7 /* Sources */,
 				6DE4D1AC244C0D9000DC82B7 /* Frameworks */,
 				6DE4D1AD244C0D9000DC82B7 /* Resources */,
+				A73C14D8B78493F1967226C7 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -136,15 +207,64 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		940BA694C2EF790490DB7526 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SocialOne-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A73C14D8B78493F1967226C7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SocialOne/Pods-SocialOne-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SocialOne/Pods-SocialOne-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SocialOne/Pods-SocialOne-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		6DE4D1AB244C0D9000DC82B7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6DE4D1B7244C0D9000DC82B7 /* ViewController.swift in Sources */,
+				6DE4D1B7244C0D9000DC82B7 /* LoginViewController.swift in Sources */,
+				6DE282CE24547B4C0000ACA5 /* TwitterAPICaller.swift in Sources */,
+				6DE282C624541E140000ACA5 /* RegisterViewController.swift in Sources */,
+				6DE282D3245537050000ACA5 /* InstagramCollectionViewCell.swift in Sources */,
 				6DE4D1B3244C0D9000DC82B7 /* AppDelegate.swift in Sources */,
 				6DE4D1B5244C0D9000DC82B7 /* SceneDelegate.swift in Sources */,
+				6DE282CA24541EEB0000ACA5 /* ProfileViewController.swift in Sources */,
+				6DE282C824541ED00000ACA5 /* FeedViewController.swift in Sources */,
+				6DE282D1245536BF0000ACA5 /* TwitterCollectionViewCell.swift in Sources */,
 				6DE4D1BD244C0D9000DC82B7 /* SocialOne.xcdatamodeld in Sources */,
+				6DE282D5245537340000ACA5 /* FacebookCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,6 +406,7 @@
 		};
 		6DE4D1C7244C0D9500DC82B7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C1B80C8D620715D2662D582F /* Pods-SocialOne.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -304,6 +425,7 @@
 		};
 		6DE4D1C8244C0D9500DC82B7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 09B62CA78BC77BE4118261FC /* Pods-SocialOne.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
