@@ -49,6 +49,7 @@ PODS:
     - Parse/Core (= 1.17.3)
   - Parse/Core (1.17.3):
     - Bolts/Tasks (~> 1.9)
+  - SwiftyJSON (5.0.0)
 
 DEPENDENCIES:
   - AFNetworking
@@ -59,6 +60,7 @@ DEPENDENCIES:
   - FacebookShare
   - InstagramLogin
   - Parse
+  - SwiftyJSON
 
 SPEC REPOS:
   trunk:
@@ -75,6 +77,7 @@ SPEC REPOS:
     - FBSDKShareKit
     - InstagramLogin
     - Parse
+    - SwiftyJSON
 
 SPEC CHECKSUMS:
   AFNetworking: a0075feb321559dc78d9d85b55d11caa19eabb93
@@ -90,7 +93,8 @@ SPEC CHECKSUMS:
   FBSDKShareKit: 259737eab3cc807087374553abdf588b3096ba55
   InstagramLogin: 55a3ab7aa6ee3f75bf06fdec1bb8f1e01e2c0b00
   Parse: c1ad2a04d2cab2b54b6fb7da05f741abf2cf57d1
+  SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: 1a8187071e6f22cf73be19896e7a3449e1478cff
+PODFILE CHECKSUM: b97bb7b36daaa11094d26b365a015bc67be64742
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.9.1

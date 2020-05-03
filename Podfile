@@ -14,4 +14,5 @@ target 'SocialOne' do
   pod 'AFNetworking'
   pod 'BDBOAuth1Manager'
   pod 'AlamofireImage'
+  pod 'SwiftyJSON'
 end

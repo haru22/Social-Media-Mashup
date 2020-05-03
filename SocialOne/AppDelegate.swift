@@ -26,15 +26,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             })
         )
         
-        ApplicationDelegate.shared.application(
-                 application,
-                 didFinishLaunchingWithOptions: launchOptions
-             )
+            ApplicationDelegate.shared.application(
+               application,
+               didFinishLaunchingWithOptions: launchOptions
+           )
+        
+        
+        
         return true
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         TwitterAPICaller.client?.handleOpenUrl(url: url)
+
+        
         ApplicationDelegate.shared.application(
             app,
             open: url,

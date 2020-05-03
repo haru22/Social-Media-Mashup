@@ -61,20 +61,24 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 
+
+
     <key>CFBundleURLTypes</key>
     <array>
       <dict>
       <key>CFBundleURLSchemes</key>
       <array>
-        <string>fb324752218504327</string>
+        <string>fb1644126129070470</string>
       </array>
       </dict>
     </array>
     <key>FacebookAppID</key>
-    <string>324752218504327</string>
+    <string>1644126129070470</string>
     <key>FacebookDisplayName</key>
-    <string>SocialOne</string>
+    <string>Social One</string>
     
+    
+
     <key>LSApplicationQueriesSchemes</key>
     <array>
       <string>fbapi</string>
@@ -93,5 +97,6 @@
       <string>fbauth2</string>
       <string>fbshareextension</string>
     </array>
+    
 </dict>
 </plist>

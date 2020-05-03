@@ -23,7 +23,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if PFUser.current() != nil {
             let main = UIStoryboard(name: "Main", bundle: nil)
             let tabBarController = main.instantiateViewController(identifier: "TabBarController")
-            window?.rootViewController = tabBarController
+            //window?.rootViewController = tabBarController
+           //I have done this for test purposes only.  please delete the code below and uncommet the line above to return to normal - kevin orellana
+            let SocialMediaViewController = main.instantiateViewController(identifier: "SocialMediaViewController")
+            window?.rootViewController = SocialMediaViewController
         }
     }
 

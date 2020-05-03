@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import FBSDKLoginKit
+import FBSDKCoreKit
 
 class FacebookCollectionViewCell: UICollectionViewCell {
     
@@ -26,5 +28,15 @@ class FacebookCollectionViewCell: UICollectionViewCell {
     }
     
     @IBAction func loginButtonOnClick(_ sender: UIButton) {
+
+            /*
+
+             if let token = AccessToken.current,
+                 !token.isExpired {
+                 // User is logged in, do work such as go to next view controller.
+             }
+             */
+            
+        
     }
 }
