@@ -47,7 +47,9 @@ class SocialMediaViewController: UIViewController {
             
             print("Successful Login!")
             
-            self.getUserProfile()
+            self.performSegue(withIdentifier: "toFeed", sender: nil)
+            
+            //self.getUserProfile()
             
         }
         
