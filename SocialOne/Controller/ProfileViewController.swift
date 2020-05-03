@@ -8,7 +8,8 @@
 
 import UIKit
 import Parse
-
+import FBSDKLoginKit
+import FBSDKCoreKit
 class ProfileViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 
     
@@ -139,6 +140,36 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
             cell.layer.masksToBounds = false
             cell.layer.shadowPath = UIBezierPath(roundedRect: cell.bounds, cornerRadius: cell.contentView.layer.cornerRadius).cgPath
             return cell
+        }
+    }
+    
+    @IBAction func onFacebookLoginButton(_ sender: Any) {
+        
+        
+        
+        /*
+          if let token = AccessToken.current,
+              !token.isExpired {
+              // User is logged in, do work such as go to next view controller.
+          }*/
+          
+         let loginManger = LoginManager()
+         loginManger.logIn(permissions: ["public_profile", "user_posts"], from: self) { (result, error) in
+             
+             
+             if let error = error {
+               print("Failed to login: \(error.localizedDescription)")
+               return
+             }
+             
+             else {
+               print("Failed to get access token")
+               return
+                 }
+             
+             print("Successful Login!")
+             
+          
         }
     }
 }

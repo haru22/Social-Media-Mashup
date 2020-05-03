@@ -15,6 +15,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
       
     
     var apiResult: JSON = JSON()
+    var loaded: Bool = false
     
 
     
@@ -47,7 +48,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                     }
                       
                       
-                let request = GraphRequest(graphPath: "/me/feed", parameters: ["fields":"full_picture, name" ], httpMethod: .get)
+                let request = GraphRequest(graphPath: "/me/feed", parameters: ["fields":"name, from, message, full_picture" ], httpMethod: .get)
                       request.start(completionHandler: { connection, result, error in
                           
                           if error == nil
@@ -56,6 +57,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                             self.apiResult = JSON(result)
                             print("Json Result new \(self.apiResult)")
                             print("IMage URl: \(self.apiResult["data"][0]["full_picture"].string ?? "false")")
+                            self.loaded = true
                             self.tableView.reloadData()
                              
                     
@@ -81,11 +83,44 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                   }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if(loaded)
+        {
+            return self.apiResult["data"].count
+        }
+        
         return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        
+        if(loaded)
+        {
+            if(self.apiResult["data"][indexPath.row]["full_picture"].string == nil)
+            {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "FacebookFeedTwoTableViewCell") as! FacebookFeedTwoTableViewCell
+                cell.usernameLabel.text = self.apiResult["data"][indexPath.row]["from"]["name"].string ?? "error"
+                cell.postContent.text = self.apiResult["data"][indexPath.row]["message"].string ?? "error"
+                return cell
+            }
+            
+            else
+            {
+                var imageUrl = URL(string: apiResult["data"][indexPath.row]["full_picture"].string!)
+                let cell = tableView.dequeueReusableCell(withIdentifier: "FacebookFeedTableViewCell") as! FacebookFeedTableViewCell
+                
+                cell.usernameLabel.text = self.apiResult["data"][indexPath.row]["from"]["name"].string ?? "error"
+                cell.postContentLabel.text = self.apiResult["data"][indexPath.row]["message"].string ?? "error"
+                cell.postImage.af_setImage(withURL: imageUrl!)
+                
+                return cell
+                
+            }
+        }
+        
+        return tableView.dequeueReusableCell(withIdentifier: "LoadingTableViewCell") as! LoadingTableViewCell
+
+        /*
         let cell = tableView.dequeueReusableCell(withIdentifier: "FacebookFeedTableViewCell") as! FacebookFeedTableViewCell
         print("IMage URl 2: \(self.apiResult["data"][0]["full_picture"].string)")
         var url = self.apiResult["data"][0]["full_picture"].string ?? "nil"
@@ -106,6 +141,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.postContentLabel.text = "hello hahahah"
            
         return cell
+ */
     }
 
 }
