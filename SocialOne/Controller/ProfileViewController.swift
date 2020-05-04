@@ -162,7 +162,7 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
                return
              }
              
-             else {
+             else {//Note to self - please fix the login here
                print("Failed to get access token")
                return
                  }
@@ -172,4 +172,21 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
           
         }
     }
+    
+    
+    @IBAction func onTwitterLoginButton(_ sender: Any) {
+        
+        print("on twitter login")
+        let myUrl = "https://api.twitter.com/oauth/request_token"
+        
+        TwitterAPICaller.client?.login(url: myUrl, success: {
+            
+            print("log in sucessfully to twitter")
+            self.performSegue(withIdentifier: "backFromTwitter", sender: self)
+        }, failure: { (Error) in
+            print("falide to sign in to twitter\n]=\(Error.localizedDescription)")
+        })
+        
+    }
+    
 }

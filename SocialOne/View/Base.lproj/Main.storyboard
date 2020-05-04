@@ -427,14 +427,6 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="power" catalog="system"/>
                             </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a29-sv-Nbn">
-                                <rect key="frame" x="123" y="609" width="169" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" weight="black" pointSize="18"/>
-                                <state key="normal" title="Login with Twitter">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BdQ-eu-gPq">
                                 <rect key="frame" x="117" y="154" width="201" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -445,6 +437,17 @@
                                 </state>
                                 <connections>
                                     <action selector="onFacebookLoginButton:" destination="Tpt-0y-Kur" eventType="touchUpInside" id="Fpi-uU-QYJ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B2k-AD-kNb">
+                                <rect key="frame" x="135" y="617" width="156" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="LogIn with Twitter">
+                                    <color key="titleColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="onTwitterLoginButton:" destination="Tpt-0y-Kur" eventType="touchUpInside" id="R3W-JA-Pko"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -459,6 +462,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="HRJ-wH-2Fy" kind="presentation" identifier="backFromTwitter" id="Vuc-gJ-GoD"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tTb-9w-cyu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -693,38 +699,6 @@
             </objects>
             <point key="canvasLocation" x="1993" y="477"/>
         </scene>
-        <!--Social Media View Controller-->
-        <scene sceneID="lz5-S9-QK5">
-            <objects>
-                <viewController storyboardIdentifier="SocialMediaViewController" id="gaO-U9-1kO" customClass="SocialMediaViewController" customModule="SocialOne" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="SZR-GG-w0R">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5fM-Ah-md8">
-                                <rect key="frame" x="144" y="433" width="126" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Facebook Login">
-                                    <color key="titleColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                </state>
-                                <connections>
-                                    <action selector="onFacebookLoginButton:" destination="gaO-U9-1kO" eventType="touchUpInside" id="mdg-WW-kNw"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="E8w-yZ-kpt"/>
-                    </view>
-                    <connections>
-                        <segue destination="HRJ-wH-2Fy" kind="presentation" identifier="toFeed" id="vTm-JT-txa"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ZQG-LM-lzT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2639" y="-496"/>
-        </scene>
         <!--Profile-->
         <scene sceneID="9wi-Xu-m12">
             <objects>
@@ -779,6 +753,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="EvR-04-juo"/>
-        <segue reference="vTm-JT-txa"/>
+        <segue reference="Vuc-gJ-GoD"/>
     </inferredMetricsTieBreakers>
 </document>
