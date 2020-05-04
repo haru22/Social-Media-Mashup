@@ -178,5 +178,5 @@ Facebook API
 
 **Build Progress
 <img src="https://recordit.co/vI8NF71eqX.gif" width=250>
-<img src= "https://recordit.co/Sf1oIieLTz" width=250>
+<img src= "https://recordit.co/Sf1oIieLTz.gif" width=250>
 
