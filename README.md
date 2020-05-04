@@ -176,3 +176,9 @@ Facebook API
 | GET     | /{user-id}/posts     | shows only the posts that were published by this person.     |
 | GET    | /{user-id}/tagged   |shows only the posts that this person was tagged in.
 
+## Build Progress
+
+<img src="https://recordit.co/vI8NF71eqX.gif" width=250>
+
+<img src= "https://recordit.co/Sf1oIieLTz.gif" width=250>
+
