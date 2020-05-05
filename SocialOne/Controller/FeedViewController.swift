@@ -74,13 +74,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     
           
-    func getUserProfile()
-              {
-                  
 
-              
-                      
-                  }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if(loaded)
@@ -91,7 +85,8 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         return 1
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    {
         
         
         if(loaded)
@@ -120,28 +115,6 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         return tableView.dequeueReusableCell(withIdentifier: "LoadingTableViewCell") as! LoadingTableViewCell
 
-        /*
-        let cell = tableView.dequeueReusableCell(withIdentifier: "FacebookFeedTableViewCell") as! FacebookFeedTableViewCell
-        print("IMage URl 2: \(self.apiResult["data"][0]["full_picture"].string)")
-        var url = self.apiResult["data"][0]["full_picture"].string ?? "nil"
-        if(url != "nil")
-        {
-            print("INSIDE TO VIEW IMAGE *******************************")
-            var imageUrl = URL(string: apiResult["data"][0]["full_picture"].string!)
-            cell.postImage.af_setImage(withURL: imageUrl!)
-        }
-        
-        print("Second!!!!!!!!!!!\(self.apiResult)")
-        
-       // var imageUrl = URL(string: apiResult["data"][0]["full_picture"].string!)
-           
-        //let cell = tableView.dequeueReusableCell(withIdentifier: "FacebookFeedTableViewCell") as! FacebookFeedTableViewCell
-      //  cell.postImage.af_setImage(withURL: imageUrl!)
-        cell.usernameLabel.text = "Kevin Orellana"
-        cell.postContentLabel.text = "hello hahahah"
-           
-        return cell
- */
-    }
+  }
 
 }
