@@ -41,11 +41,11 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                 GraphRequest(graphPath: "me", parameters:  ["fields": "id, name, about"]).start(completionHandler: { connection, result, error in
                         if error == nil {
                                 if let result = result {
-                                    print("fetched user:\(result)")
+                                    //print("fetched user:\(result)")
                                 }
                             }
                         })
-                    }
+            }
                       
                       
                 let request = GraphRequest(graphPath: "/me/feed", parameters: ["fields":"name, from, message, full_picture" ], httpMethod: .get)
@@ -55,8 +55,8 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                           {
                               
                             self.apiResult = JSON(result)
-                            print("Json Result new \(self.apiResult)")
-                            print("IMage URl: \(self.apiResult["data"][0]["full_picture"].string ?? "false")")
+                            //print("Json Result new \(self.apiResult)")
+                           // print("IMage URl: \(self.apiResult["data"][0]["full_picture"].string ?? "false")")
                             self.loaded = true
                             self.tableView.reloadData()
                              

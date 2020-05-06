@@ -464,6 +464,7 @@
                         <barButtonItem key="rightBarButtonItem" title="Settings" image="gear" catalog="system" id="vRn-wq-KaW"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="facebookProfileImage" destination="ONf-7F-VCv" id="0Fy-QE-ULs"/>
                         <segue destination="HRJ-wH-2Fy" kind="presentation" identifier="backFromTwitter" id="Vuc-gJ-GoD"/>
                     </connections>
                 </viewController>
@@ -480,7 +481,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3Xh-Dy-Tie">
-                                <rect key="frame" x="0.0" y="56" width="414" height="786"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FacebookFeedTableViewCell" rowHeight="276" id="Lmz-O2-L3n" customClass="FacebookFeedTableViewCell" customModule="SocialOne" customModuleProvider="target">
@@ -807,6 +808,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="EvR-04-juo"/>
-        <segue reference="qFc-iC-hbt"/>
+        <segue reference="Vuc-gJ-GoD"/>
     </inferredMetricsTieBreakers>
 </document>

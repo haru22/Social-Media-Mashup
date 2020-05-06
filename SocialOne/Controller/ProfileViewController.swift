@@ -10,26 +10,22 @@ import UIKit
 import Parse
 import FBSDKLoginKit
 import FBSDKCoreKit
+import SwiftyJSON
+
 class ProfileViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 
+    @IBOutlet weak var facebookProfileImage: UIImageView!
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
 
         // Do any additional setup after loading the view.
     }
     
 
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
     @IBAction func logoutOnClick(_ sender: UIBarButtonItem) {
         PFUser.logOut()
@@ -152,6 +148,8 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
               !token.isExpired {
               // User is logged in, do work such as go to next view controller.
           }*/
+
+        self.loadFacebookProfileInfo()
           
          let loginManger = LoginManager()
          loginManger.logIn(permissions: ["public_profile", "user_posts"], from: self) { (result, error) in
@@ -189,4 +187,97 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
         
     }
     
+    
+    func loadFacebookProfileInfo()
+    {
+        print("Loading facebook profile info")
+        var userId: String = ""
+        
+        if (AccessToken.current != nil)
+        {
+            GraphRequest(graphPath: "me", parameters:  ["fields": "id"]).start(completionHandler: { connection, result, error in
+                    if error == nil {
+                            if let result = result {
+                                print("fetched user:\(result)")
+                                userId = JSON(result)["id"].string!
+                                print("User Id: \(userId)")
+                            }
+                        }
+                
+                if userId != " "
+                {
+                    print("Loading profile image")
+                    var profilePicUrl = URL(string: "https://graph.facebook.com/\(userId)/picture?type=small")
+                    self.facebookProfileImage.layer.cornerRadius = self.facebookProfileImage.frame.size.width/2
+                    self.facebookProfileImage.af_setImage(withURL: profilePicUrl!)
+                    
+                }
+                
+                    })
+            
+
+        }
+        
+        
+        
+        
+        /*if AccessToken.current != nil
+        {
+            let params = [
+                "height" : NSNumber(integerLiteral: 100),
+                "width" : NSNumber(integerLiteral: 100)
+            ]
+            
+            GraphRequest(graphPath: "/me/picture", parameters: ["":""], httpMethod: .get).start { (connection, result, error) in
+                if error == nil
+                {
+                    print("\n\nProfile Image \(result!)\n\n")
+                }
+                else
+                {
+                    print("ERROR LOADING PROFILE \(error?.localizedDescription)")
+                }
+            }*/
+                
+            
+            
+            
+        
+    }
+    
+    
+    /*
+    if (AccessToken.current != nil)
+               {
+                   GraphRequest(graphPath: "me", parameters:  ["fields": "id, name, about"]).start(completionHandler: { connection, result, error in
+                           if error == nil {
+                                   if let result = result {
+                                       print("fetched user:\(result)")
+                                   }
+                               }
+                           })
+                       }
+                         
+                         
+                   let request = GraphRequest(graphPath: "/me/feed", parameters: ["fields":"name, from, message, full_picture" ], httpMethod: .get)
+                         request.start(completionHandler: { connection, result, error in
+                             
+                             if error == nil
+                             {
+                                 
+                               self.apiResult = JSON(result)
+                               print("Json Result new \(self.apiResult)")
+                               print("IMage URl: \(self.apiResult["data"][0]["full_picture"].string ?? "false")")
+                               self.loaded = true
+                               self.tableView.reloadData()
+                                
+                       
+
+                             }
+                         
+                             
+                         })
+
+                           print("AT THE END OF PROFILE USER")
+                       self.tableView.reloadData()*/
 }
