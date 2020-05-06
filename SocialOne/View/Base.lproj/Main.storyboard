@@ -467,6 +467,7 @@
                         <outlet property="facebookFriendsCountLabel" destination="SQE-gF-0ao" id="lBc-Aa-WIw"/>
                         <outlet property="facebookPhotoCount" destination="Yvk-vR-8QC" id="74L-ok-HXQ"/>
                         <outlet property="facebookProfileImage" destination="ONf-7F-VCv" id="0Fy-QE-ULs"/>
+                        <outlet property="facebookUserNameLabel" destination="9Ga-c6-lq6" id="WAA-dp-phP"/>
                         <segue destination="HRJ-wH-2Fy" kind="presentation" identifier="backFromTwitter" id="Vuc-gJ-GoD"/>
                     </connections>
                 </viewController>

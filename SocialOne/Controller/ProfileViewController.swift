@@ -15,10 +15,11 @@ import SwiftyJSON
 class ProfileViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 
     @IBOutlet weak var facebookProfileImage: UIImageView!
-    
     @IBOutlet weak var facebookFriendsCountLabel: UILabel!
-    
     @IBOutlet weak var facebookPhotoCount: UILabel!
+    @IBOutlet weak var facebookUserNameLabel: UILabel!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.loadFacebookProfileInfo()
@@ -203,11 +204,17 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
             
             //loading user's profile picture
             GraphRequest(graphPath: "me", parameters:  ["fields": "id, name"]).start(completionHandler: { connection, result, error in
+                
+                var userName: String = "Unknown"
+                var jsonResponse : JSON
                 if error == nil
                 {
                         if let result = result {
                             print("fetched user:\(result)")
-                            userId = JSON(result)["id"].string!
+                            jsonResponse = JSON(result)
+                            userId = jsonResponse["id"].string!
+                            userName = jsonResponse["name"].string ?? "Unkown"
+                            
                             print("User Id: \(userId)")
                         }
                 }
@@ -220,6 +227,8 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
                     self.facebookProfileImage.af.setImage(withURL: profilePicUrl!)
                     
                 }
+                
+                self.facebookUserNameLabel.text = userName
                 
             })
             
@@ -269,6 +278,7 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
                 }
                 
             }
+            
             
 
         }
