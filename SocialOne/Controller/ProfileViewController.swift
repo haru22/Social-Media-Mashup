@@ -18,6 +18,7 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
     
     @IBOutlet weak var facebookFriendsCountLabel: UILabel!
     
+    @IBOutlet weak var facebookPhotoCount: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.loadFacebookProfileInfo()
@@ -153,7 +154,7 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
         
           
          let loginManger = LoginManager()
-         loginManger.logIn(permissions: ["public_profile", "user_posts", "user_friends"], from: self) { (result, error) in
+         loginManger.logIn(permissions: ["public_profile", "user_posts", "user_friends","user_photos"], from: self) { (result, error) in
              
              
              if let error = error {
@@ -199,7 +200,9 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
         
         if (AccessToken.current != nil)
         {
-            GraphRequest(graphPath: "me", parameters:  ["fields": "id"]).start(completionHandler: { connection, result, error in
+            
+            //loading user's profile picture
+            GraphRequest(graphPath: "me", parameters:  ["fields": "id, name"]).start(completionHandler: { connection, result, error in
                 if error == nil
                 {
                         if let result = result {
@@ -211,7 +214,7 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
             
                 if userId != ""
                 {
-                    print("Loading profile image")
+                    //print("Loading profile image")
                     let profilePicUrl = URL(string: "https://graph.facebook.com/\(userId)/picture?type=small")
                     self.facebookProfileImage.layer.cornerRadius = self.facebookProfileImage.frame.size.width/2 //making image view circular.
                     self.facebookProfileImage.af.setImage(withURL: profilePicUrl!)
@@ -221,21 +224,50 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
             })
             
             
+            //determining number of friends
             GraphRequest(graphPath: "/me/friends", parameters: ["field" : "total_count"] , httpMethod: .get).start { (connection, result, error) in
                 
                 if error == nil
                 {
                     if let result = result
                     {
-                        print("User Friends: \(result)")
-                        print(JSON(result)["summary"]["total_count"].int)
                         
+                        //getting the number of user friends.
                         userFriendCount = String(JSON(result)["summary"]["total_count"].int ?? 0)
                         self.facebookFriendsCountLabel.text = userFriendCount
                         
                     }
                     
                 }
+            }
+            
+            
+            //determining number of pictures
+            GraphRequest(graphPath: "/me/albums", parameters: ["fields": "name, count"], httpMethod: .get).start { (connection, result, error) in
+                
+                if error == nil
+                {
+                    
+                    if let result = result
+                    {
+                        let albumData = JSON(result)["data"]
+                        let albumCount: Int = albumData.count
+                        var loopCounter: Int = 0
+                        var photoCount: Int = 0
+                        
+                        //determining the number of pictures in each of the user's albums
+                        while (loopCounter < albumCount)
+                        {
+                           
+                            photoCount += albumData[loopCounter]["count"].int ?? 0
+                            loopCounter += 1
+                        }
+                        
+                        self.facebookPhotoCount.text = String(photoCount) //updating photo count in the UI
+                       
+                    }
+                }
+                
             }
             
 
