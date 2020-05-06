@@ -14,9 +14,6 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
 
     @IBOutlet weak var postImage: UIImageView!
     
-    @IBOutlet weak var commentTextField: UITextField!
-    
-    
     
     
     
@@ -35,15 +32,7 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         let facebookPhoto = SharePhoto()
         facebookPhoto.image = postImage.image
         facebookPhoto.isUserGenerated = true
-        let facebookCaption = commentTextField.text
 
-        print("Facebook Caption: \(facebookCaption!)")
-         if facebookCaption != nil//if there is a caption
-         {
-             print("Facebook Caption: \(facebookCaption!)")
-             facebookPhoto.caption = facebookCaption!
-         }
-        
         /*
         let content = SharePhotoContent()
         content.photos = [facebookPhoto]
@@ -126,14 +115,15 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         postImage.image =  scaledImage
         
         dismiss(animated: true, completion: nil)
-        
-
-
-        
+    
         
         
     }
     
     
+    @IBAction func onFinishedButton(_ sender: Any) {
+        
+        dismiss(animated: true, completion: nil)
+    }
     
 }
