@@ -16,9 +16,11 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
 
     @IBOutlet weak var facebookProfileImage: UIImageView!
     
-
+    @IBOutlet weak var facebookFriendsCountLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.loadFacebookProfileInfo()
         
 
         // Do any additional setup after loading the view.
@@ -148,24 +150,25 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
               !token.isExpired {
               // User is logged in, do work such as go to next view controller.
           }*/
-
-        self.loadFacebookProfileInfo()
+        
           
          let loginManger = LoginManager()
-         loginManger.logIn(permissions: ["public_profile", "user_posts"], from: self) { (result, error) in
+         loginManger.logIn(permissions: ["public_profile", "user_posts", "user_friends"], from: self) { (result, error) in
              
              
              if let error = error {
                print("Failed to login: \(error.localizedDescription)")
                return
              }
+        
+             else
+             {
+                print("Successful Login!")
+                self.loadFacebookProfileInfo()
+                return
+             }
              
-             else {//Note to self - please fix the login here
-               print("Failed to get access token")
-               return
-                 }
-             
-             print("Successful Login!")
+          
              
           
         }
@@ -192,92 +195,55 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
     {
         print("Loading facebook profile info")
         var userId: String = ""
+        var userFriendCount: String = "0"
         
         if (AccessToken.current != nil)
         {
             GraphRequest(graphPath: "me", parameters:  ["fields": "id"]).start(completionHandler: { connection, result, error in
-                    if error == nil {
-                            if let result = result {
-                                print("fetched user:\(result)")
-                                userId = JSON(result)["id"].string!
-                                print("User Id: \(userId)")
-                            }
+                if error == nil
+                {
+                        if let result = result {
+                            print("fetched user:\(result)")
+                            userId = JSON(result)["id"].string!
+                            print("User Id: \(userId)")
                         }
-                
-                if userId != " "
+                }
+            
+                if userId != ""
                 {
                     print("Loading profile image")
-                    var profilePicUrl = URL(string: "https://graph.facebook.com/\(userId)/picture?type=small")
-                    self.facebookProfileImage.layer.cornerRadius = self.facebookProfileImage.frame.size.width/2
-                    self.facebookProfileImage.af_setImage(withURL: profilePicUrl!)
+                    let profilePicUrl = URL(string: "https://graph.facebook.com/\(userId)/picture?type=small")
+                    self.facebookProfileImage.layer.cornerRadius = self.facebookProfileImage.frame.size.width/2 //making image view circular.
+                    self.facebookProfileImage.af.setImage(withURL: profilePicUrl!)
                     
                 }
                 
-                    })
+            })
+            
+            
+            GraphRequest(graphPath: "/me/friends", parameters: ["field" : "total_count"] , httpMethod: .get).start { (connection, result, error) in
+                
+                if error == nil
+                {
+                    if let result = result
+                    {
+                        print("User Friends: \(result)")
+                        print(JSON(result)["summary"]["total_count"].int)
+                        
+                        userFriendCount = String(JSON(result)["summary"]["total_count"].int ?? 0)
+                        self.facebookFriendsCountLabel.text = userFriendCount
+                        
+                    }
+                    
+                }
+            }
             
 
         }
-        
-        
-        
-        
-        /*if AccessToken.current != nil
-        {
-            let params = [
-                "height" : NSNumber(integerLiteral: 100),
-                "width" : NSNumber(integerLiteral: 100)
-            ]
-            
-            GraphRequest(graphPath: "/me/picture", parameters: ["":""], httpMethod: .get).start { (connection, result, error) in
-                if error == nil
-                {
-                    print("\n\nProfile Image \(result!)\n\n")
-                }
-                else
-                {
-                    print("ERROR LOADING PROFILE \(error?.localizedDescription)")
-                }
-            }*/
-                
-            
-            
-            
+
         
     }
     
     
-    /*
-    if (AccessToken.current != nil)
-               {
-                   GraphRequest(graphPath: "me", parameters:  ["fields": "id, name, about"]).start(completionHandler: { connection, result, error in
-                           if error == nil {
-                                   if let result = result {
-                                       print("fetched user:\(result)")
-                                   }
-                               }
-                           })
-                       }
-                         
-                         
-                   let request = GraphRequest(graphPath: "/me/feed", parameters: ["fields":"name, from, message, full_picture" ], httpMethod: .get)
-                         request.start(completionHandler: { connection, result, error in
-                             
-                             if error == nil
-                             {
-                                 
-                               self.apiResult = JSON(result)
-                               print("Json Result new \(self.apiResult)")
-                               print("IMage URl: \(self.apiResult["data"][0]["full_picture"].string ?? "false")")
-                               self.loaded = true
-                               self.tableView.reloadData()
-                                
-                       
 
-                             }
-                         
-                             
-                         })
-
-                           print("AT THE END OF PROFILE USER")
-                       self.tableView.reloadData()*/
 }

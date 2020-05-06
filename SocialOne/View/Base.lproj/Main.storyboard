@@ -464,6 +464,7 @@
                         <barButtonItem key="rightBarButtonItem" title="Settings" image="gear" catalog="system" id="vRn-wq-KaW"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="facebookFriendsCountLabel" destination="SQE-gF-0ao" id="lBc-Aa-WIw"/>
                         <outlet property="facebookProfileImage" destination="ONf-7F-VCv" id="0Fy-QE-ULs"/>
                         <segue destination="HRJ-wH-2Fy" kind="presentation" identifier="backFromTwitter" id="Vuc-gJ-GoD"/>
                     </connections>
