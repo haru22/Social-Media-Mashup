@@ -275,6 +275,9 @@
                                 <rect key="frame" x="374" y="74" width="20" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="power" catalog="system"/>
+                                <connections>
+                                    <action selector="onFacebookLogOff:" destination="Tpt-0y-Kur" eventType="touchUpInside" id="XGQ-nS-qgM"/>
+                                </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dMl-ZY-6Fg">
                                 <rect key="frame" x="102" y="767" width="189" height="34"/>
@@ -566,6 +569,7 @@
                                         <connections>
                                             <outlet property="postContentLabel" destination="ZYh-LJ-UK1" id="eZm-8j-TZM"/>
                                             <outlet property="postImage" destination="fpm-jL-G60" id="iOL-lR-WvV"/>
+                                            <outlet property="profileImage" destination="qcW-Ak-Nsb" id="3hj-eL-8Rf"/>
                                             <outlet property="usernameLabel" destination="B21-1X-bI0" id="Drs-4y-uFb"/>
                                         </connections>
                                     </tableViewCell>
@@ -638,6 +642,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="postContent" destination="tLy-ni-UWr" id="fFW-x1-fWe"/>
+                                            <outlet property="profileImage" destination="O50-lH-bYQ" id="qX2-dp-OyW"/>
                                             <outlet property="usernameLabel" destination="6El-4X-CZI" id="srK-IY-CHY"/>
                                         </connections>
                                     </tableViewCell>

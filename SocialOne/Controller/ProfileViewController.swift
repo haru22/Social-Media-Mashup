@@ -18,7 +18,7 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
     @IBOutlet weak var facebookFriendsCountLabel: UILabel!
     @IBOutlet weak var facebookPhotoCount: UILabel!
     @IBOutlet weak var facebookUserNameLabel: UILabel!
-    
+     let loginManger = LoginManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -154,7 +154,7 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
           }*/
         
           
-         let loginManger = LoginManager()
+        
          loginManger.logIn(permissions: ["public_profile", "user_posts", "user_friends","user_photos"], from: self) { (result, error) in
              
              
@@ -278,6 +278,7 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
                 }
                 
             }
+    
             
             
 
@@ -285,6 +286,12 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
 
         
     }
+    
+    @IBAction func onFacebookLogOff(_ sender: Any) {
+        
+        loginManger.logOut()
+    }
+    
     
     
 

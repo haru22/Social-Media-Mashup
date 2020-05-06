@@ -13,6 +13,7 @@ class FacebookFeedTableViewCell: UITableViewCell {
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var postContentLabel: UILabel!
     @IBOutlet weak var postImage: UIImageView!
+    @IBOutlet weak var profileImage: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

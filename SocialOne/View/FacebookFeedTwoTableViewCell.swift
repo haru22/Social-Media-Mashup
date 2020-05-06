@@ -12,6 +12,8 @@ class FacebookFeedTwoTableViewCell: UITableViewCell {
 
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var postContent: UILabel!
+    @IBOutlet weak var profileImage: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
