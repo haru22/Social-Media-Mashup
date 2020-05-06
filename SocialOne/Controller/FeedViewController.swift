@@ -76,7 +76,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                       {
                           
                         self.apiResult = JSON(result)
-                        print("Json Result new \(self.apiResult)")
+                        //print("Json Result new \(self.apiResult)")
                        // print("IMage URl: \(self.apiResult["data"][0]["full_picture"].string ?? "false")")
                         self.loaded = true
                         self.tableView.reloadData()
@@ -92,7 +92,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         
         
-        print("AT THE END OF PROFILE USER")
+        //print("AT THE END OF PROFILE USER")
         self.myRefreshControl.endRefreshing()
                // self.tableView.reloadData()
         
@@ -141,7 +141,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                 cell.profileImage.layer.cornerRadius = cell.profileImage.frame.size.width/2 //setting the image to have a round shape
                 cell.profileImage.af.setImage(withURL: profileImageUrl!)
                 
-                print("Image Profile Url: \(profileImageUrl!)")
+               // print("Image Profile Url: \(profileImageUrl!)")
                 
                 return cell
                 

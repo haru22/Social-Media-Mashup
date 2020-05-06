@@ -179,7 +179,7 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
     
     @IBAction func onTwitterLoginButton(_ sender: Any) {
         
-        print("on twitter login")
+        //print("on twitter login")
         let myUrl = "https://api.twitter.com/oauth/request_token"
         
         TwitterAPICaller.client?.login(url: myUrl, success: {
@@ -195,7 +195,7 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
     
     func loadFacebookProfileInfo()
     {
-        print("Loading facebook profile info")
+       // print("Loading facebook profile info")
         var userId: String = ""
         var userFriendCount: String = "0"
         
@@ -210,12 +210,12 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
                 if error == nil
                 {
                         if let result = result {
-                            print("fetched user:\(result)")
+                            //print("fetched user:\(result)")
                             jsonResponse = JSON(result)
                             userId = jsonResponse["id"].string!
                             userName = jsonResponse["name"].string ?? "Unkown"
                             
-                            print("User Id: \(userId)")
+                           // print("User Id: \(userId)")
                         }
                 }
             
