@@ -32,8 +32,8 @@ class ProfileViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.loadFacebookProfileInfo()
-        self.getInstagramIDS()
+       // self.loadFacebookProfileInfo()
+       // self.getInstagramIDS()
         
 
         // Do any additional setup after loading the view.
@@ -189,8 +189,8 @@ class ProfileViewController: UIViewController{
                     {
                         if let result = result
                         {
-                            let tempJson = JSON(result)
-                            print(tempJson)
+                           let tempJson = JSON(result)
+                            //print(tempJson)
                             
                             //setting the image
                             let profileImageUrl = URL(string: tempJson["profile_picture_url"].string!)

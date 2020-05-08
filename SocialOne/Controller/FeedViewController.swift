@@ -14,7 +14,8 @@ import SwiftyJSON
 class FeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
       
     
-    var apiResult: JSON = JSON()
+    var facebookAPIResult: JSON = JSON()
+    var instagramAPIResult: JSON = JSON()
     var loaded: Bool = false
     let myRefreshControl = UIRefreshControl()
     
@@ -47,6 +48,16 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     
+    func loadInstagramFeed()
+    {
+        
+        if(AccessToken.current != nil && (AccessToken.current?.hasGranted(permission: "instagram_basic") ?? false))
+        {
+            
+            
+        }
+    }
+    
           
     
     /*
@@ -75,8 +86,8 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                 if error == nil
                       {
                           
-                        self.apiResult = JSON(result)
-                        //print("Json Result new \(self.apiResult)")
+                        self.facebookAPIResult = JSON(result)
+                        //print("Json Facebook Feed Result new\n \(self.apiResult)")
                        // print("IMage URl: \(self.apiResult["data"][0]["full_picture"].string ?? "false")")
                         self.loaded = true
                         self.tableView.reloadData()
@@ -104,7 +115,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if(loaded)
         {
-            return self.apiResult["data"].count
+            return self.facebookAPIResult["data"].count
         }
         
         return 1
@@ -116,13 +127,13 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         if(loaded)
         {
-            if(self.apiResult["data"][indexPath.row]["full_picture"].string == nil)//if post does not contain an post image
+            if(self.facebookAPIResult["data"][indexPath.row]["full_picture"].string == nil)//if post does not contain an post image
             {
-                let userId = apiResult["data"][indexPath.row]["from"]["id"].string ?? ""
+                let userId = facebookAPIResult["data"][indexPath.row]["from"]["id"].string ?? ""
                 let profileImageUrl = URL(string: "https://graph.facebook.com/\(userId)/picture?type=small")
                 let cell = tableView.dequeueReusableCell(withIdentifier: "FacebookFeedTwoTableViewCell") as! FacebookFeedTwoTableViewCell
-                cell.usernameLabel.text = self.apiResult["data"][indexPath.row]["from"]["name"].string ?? "error"
-                cell.postContent.text = self.apiResult["data"][indexPath.row]["message"].string ?? "error"
+                cell.usernameLabel.text = self.facebookAPIResult["data"][indexPath.row]["from"]["name"].string ?? ""
+                cell.postContent.text = self.facebookAPIResult["data"][indexPath.row]["message"].string ?? ""
                 cell.profileImage.layer.cornerRadius = cell.profileImage.frame.size.width/2 //making the image to have a round shapte
                 cell.profileImage.af.setImage(withURL: profileImageUrl!)
                 return cell
@@ -130,13 +141,13 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             else
             {
-                let userId = apiResult["data"][indexPath.row]["from"]["id"].string ?? ""
+                let userId = facebookAPIResult["data"][indexPath.row]["from"]["id"].string ?? ""
                 let profileImageUrl = URL(string: "https://graph.facebook.com/\(userId)/picture?type=small")
-                let postImageUrl = URL(string: apiResult["data"][indexPath.row]["full_picture"].string!)
+                let postImageUrl = URL(string: facebookAPIResult["data"][indexPath.row]["full_picture"].string!)
                 let cell = tableView.dequeueReusableCell(withIdentifier: "FacebookFeedTableViewCell") as! FacebookFeedTableViewCell
                 
-                cell.usernameLabel.text = self.apiResult["data"][indexPath.row]["from"]["name"].string ?? "error"
-                cell.postContentLabel.text = self.apiResult["data"][indexPath.row]["message"].string ?? "error"
+                cell.usernameLabel.text = self.facebookAPIResult["data"][indexPath.row]["from"]["name"].string ?? ""
+                cell.postContentLabel.text = self.facebookAPIResult["data"][indexPath.row]["message"].string ?? ""
                 cell.postImage.af.setImage(withURL: postImageUrl!)
                 cell.profileImage.layer.cornerRadius = cell.profileImage.frame.size.width/2 //setting the image to have a round shape
                 cell.profileImage.af.setImage(withURL: profileImageUrl!)

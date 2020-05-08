@@ -28,6 +28,8 @@
 		844CD260245EC8E600721807 /* FacebookFeedTwoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844CD25F245EC8E600721807 /* FacebookFeedTwoTableViewCell.swift */; };
 		844CD262245ECD9900721807 /* LoadingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844CD261245ECD9900721807 /* LoadingTableViewCell.swift */; };
 		844CD2E42461BE8000721807 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844CD2E32461BE8000721807 /* PostViewController.swift */; };
+		84CABE112465FD11009C469D /* InstagramFeedTwoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CABE102465FD11009C469D /* InstagramFeedTwoTableViewCell.swift */; };
+		84CABE132465FD3E009C469D /* InstagramFeedOneTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CABE122465FD3E009C469D /* InstagramFeedOneTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +57,8 @@
 		844CD25F245EC8E600721807 /* FacebookFeedTwoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookFeedTwoTableViewCell.swift; sourceTree = "<group>"; };
 		844CD261245ECD9900721807 /* LoadingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingTableViewCell.swift; sourceTree = "<group>"; };
 		844CD2E32461BE8000721807 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		84CABE102465FD11009C469D /* InstagramFeedTwoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramFeedTwoTableViewCell.swift; sourceTree = "<group>"; };
+		84CABE122465FD3E009C469D /* InstagramFeedOneTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramFeedOneTableViewCell.swift; sourceTree = "<group>"; };
 		C1B80C8D620715D2662D582F /* Pods-SocialOne.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialOne.debug.xcconfig"; path = "Target Support Files/Pods-SocialOne/Pods-SocialOne.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -153,6 +157,8 @@
 				844CD25B245E9EDF00721807 /* FacebookFeedTableViewCell.swift */,
 				844CD25F245EC8E600721807 /* FacebookFeedTwoTableViewCell.swift */,
 				844CD261245ECD9900721807 /* LoadingTableViewCell.swift */,
+				84CABE102465FD11009C469D /* InstagramFeedTwoTableViewCell.swift */,
+				84CABE122465FD3E009C469D /* InstagramFeedOneTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -273,6 +279,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6DE4D1B7244C0D9000DC82B7 /* LoginViewController.swift in Sources */,
+				84CABE112465FD11009C469D /* InstagramFeedTwoTableViewCell.swift in Sources */,
 				6DE282CE24547B4C0000ACA5 /* TwitterAPICaller.swift in Sources */,
 				844CD260245EC8E600721807 /* FacebookFeedTwoTableViewCell.swift in Sources */,
 				844CD2E42461BE8000721807 /* PostViewController.swift in Sources */,
@@ -284,6 +291,7 @@
 				6DE4D1B3244C0D9000DC82B7 /* AppDelegate.swift in Sources */,
 				6DE4D1B5244C0D9000DC82B7 /* SceneDelegate.swift in Sources */,
 				6DE282CA24541EEB0000ACA5 /* ProfileViewController.swift in Sources */,
+				84CABE132465FD3E009C469D /* InstagramFeedOneTableViewCell.swift in Sources */,
 				6DE282C824541ED00000ACA5 /* FeedViewController.swift in Sources */,
 				6DE282D1245536BF0000ACA5 /* TwitterCollectionViewCell.swift in Sources */,
 				6DE4D1BD244C0D9000DC82B7 /* SocialOne.xcdatamodeld in Sources */,
