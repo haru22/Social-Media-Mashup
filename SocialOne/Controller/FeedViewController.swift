@@ -18,6 +18,8 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     var instagramAPIResult: JSON = JSON()
     var loaded: Bool = false
     let myRefreshControl = UIRefreshControl()
+    var instagramPageID = ""
+    var instagramAccountID = ""
     
 
     @IBOutlet weak var tableView: UITableView!
@@ -30,7 +32,8 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.delegate = self
         tableView.dataSource = self
         
-        loadFacebookFeed()
+        //loadFacebookFeed()
+        getInstagramIDS()
         
         //implementing "pull down to refresh"
         myRefreshControl.addTarget(self, action: #selector(loadFacebookFeed), for: .valueChanged)
@@ -47,15 +50,77 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         
     }
 
+    func getInstagramIDS()
+    {
+        if (AccessToken.current != nil  && (AccessToken.current?.hasGranted(permission: "instagram_basic") ?? false))
+        {
+           
+            
+            GraphRequest(graphPath: "/me/accounts", parameters: ["":""], httpMethod: .get).start { (connection, result, error) in
+                if error == nil
+                {
+                    
+                    if let result = result{
+                        let temp = JSON(result)
+                        self.instagramPageID = temp["data"][0]["id"].string!
+                        //print("result from account id \(self.instagramPageID): \(temp) lets see")
+                        
+                        
+                        
+                        if(self.instagramPageID != "")
+                        {
+                            print("inside")
+                            GraphRequest(graphPath: "/\(self.instagramPageID)", parameters: ["fields":"instagram_business_account"], httpMethod: .get).start { (connection, result, error) in
+                                 if error == nil
+                                 {
+                                     
+                                     if let result = result
+                                     {
+                                         let temp = JSON(result)
+                                        self.instagramAccountID = temp["instagram_business_account"]["id"].string!
+                                        print("Information from instagram account \(self.instagramAccountID): \(temp)")
+                                        self.loadInstagramFeed()
+                                     }
+                                 }
+                                 else
+                                 {
+                                     print(error?.localizedDescription)
+                                 }
+                             }
+
+                         }
+                     }
+                 }
+                else
+                 {
+                    print(error?.localizedDescription)
+                 }
+             }
+        
+            
+        }
+    }
     
     func loadInstagramFeed()
     {
+        print("INSIDE LOADING INSTAGRAM FEED \(self.instagramAccountID)")
         
-        if(AccessToken.current != nil && (AccessToken.current?.hasGranted(permission: "instagram_basic") ?? false))
-        {
+        GraphRequest(graphPath: "/\(self.instagramAccountID)/media", parameters: ["fields":"caption, comments_count, like_count, media_type, media_url, owner, username, timestamp"], httpMethod: .get).start { (connection, result, error) in
             
-            
+            if error == nil
+            {
+                if let result = result
+                {
+                    print("BUSINESS DISCOVERY\n \(result)")
+                }
+            }
+            else
+            {
+                print("BUSINESS DISCOVER \n \(error?.localizedDescription)")
+            }
         }
+        
+        
     }
     
           
