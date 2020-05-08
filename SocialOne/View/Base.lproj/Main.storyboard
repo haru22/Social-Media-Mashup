@@ -616,6 +616,11 @@
                         <outlet property="facebookPhotoCount" destination="Yvk-vR-8QC" id="74L-ok-HXQ"/>
                         <outlet property="facebookProfileImage" destination="ONf-7F-VCv" id="0Fy-QE-ULs"/>
                         <outlet property="facebookUserNameLabel" destination="9Ga-c6-lq6" id="WAA-dp-phP"/>
+                        <outlet property="instagramFollowersCount" destination="iQl-SN-x96" id="W6f-cL-EwH"/>
+                        <outlet property="instagramFollowingCount" destination="GZM-6a-Tta" id="ePf-Jt-jye"/>
+                        <outlet property="instagramPostsCount" destination="Jjf-Ht-2CN" id="nxZ-lG-wS6"/>
+                        <outlet property="instagramProfileImage" destination="nu3-bS-Oe7" id="ct5-9p-N6J"/>
+                        <outlet property="instagramUserNameLabel" destination="Wgg-kU-lhq" id="EzZ-Mw-0ct"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tTb-9w-cyu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

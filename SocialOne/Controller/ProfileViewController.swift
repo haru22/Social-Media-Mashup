@@ -18,11 +18,22 @@ class ProfileViewController: UIViewController{
     @IBOutlet weak var facebookFriendsCountLabel: UILabel!
     @IBOutlet weak var facebookPhotoCount: UILabel!
     @IBOutlet weak var facebookUserNameLabel: UILabel!
-     let loginManger = LoginManager()
+    
+    @IBOutlet weak var instagramProfileImage: UIImageView!
+    @IBOutlet weak var instagramUserNameLabel: UILabel!
+    @IBOutlet weak var instagramPostsCount: UILabel!
+    @IBOutlet weak var instagramFollowersCount: UILabel!
+    @IBOutlet weak var instagramFollowingCount: UILabel!
+    
+    var instagramPageID: String = ""
+    var  instagramAccountID: String = ""
+    
+    let loginManger = LoginManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.loadFacebookProfileInfo()
+        //self.loadFacebookProfileInfo()
+        self.getInstagramIDS()
         
 
         // Do any additional setup after loading the view.
@@ -52,7 +63,7 @@ class ProfileViewController: UIViewController{
         
           
         
-         loginManger.logIn(permissions: ["public_profile", "user_posts", "user_friends","user_photos"], from: self) { (result, error) in
+         loginManger.logIn(permissions: ["public_profile", "user_posts", "user_friends","user_photos","instagram_basic", "pages_show_list"], from: self) { (result, error) in
              
              
              if let error = error {
@@ -63,7 +74,8 @@ class ProfileViewController: UIViewController{
              else
              {
                 print("Successful Login!")
-                self.loadFacebookProfileInfo()
+                //self.loadFacebookProfileInfo()
+                self.getInstagramIDS()
                 return
              }
              
@@ -89,6 +101,84 @@ class ProfileViewController: UIViewController{
         
     }
     
+    
+    func getInstagramIDS()
+    {
+        if (AccessToken.current != nil )
+        {
+           
+            
+            GraphRequest(graphPath: "/me/accounts", parameters: ["":""], httpMethod: .get).start { (connection, result, error) in
+                if error == nil
+                {
+                    
+                    if let result = result{
+                        let temp = JSON(result)
+                        self.instagramPageID = temp["data"][0]["id"].string!
+                        //print("result from account id \(self.instagramPageID): \(temp) lets see")
+                        
+                        
+                        
+                        if(self.instagramPageID != "")
+                        {
+                            print("inside")
+                            GraphRequest(graphPath: "/\(self.instagramPageID)", parameters: ["fields":"instagram_business_account"], httpMethod: .get).start { (connection, result, error) in
+                                 if error == nil
+                                 {
+                                     
+                                     if let result = result
+                                     {
+                                         let temp = JSON(result)
+                                        self.instagramAccountID = temp["instagram_business_account"]["id"].string!
+                                        //print("Information from instagram account \(self.instagramAccountID): \(temp)")
+                                        self.loadInstagramProfileInfo()
+                                     }
+                                 }
+                                 else
+                                 {
+                                     print(error?.localizedDescription)
+                                 }
+                             }
+
+                         }
+                     }
+                 }
+                else
+                 {
+                    print(error?.localizedDescription)
+                 }
+             }
+        
+            
+        }
+    }
+    
+       func loadInstagramProfileInfo()
+       {
+           
+           
+           print("PAGE ID: \(instagramPageID)  ACCOUNT ID \(instagramAccountID)")
+        
+            if(instagramAccountID != "")
+            {
+                GraphRequest(graphPath: "/\(instagramAccountID)", parameters: ["fields": "followers_count, follows_count,name, profile_picture_url, media_count "], httpMethod: .get).start { (connection, result, error) in
+                    
+                    if error == nil
+                    {
+                        if let result = result
+                        {
+                            print(JSON(result))
+                        }
+                    }
+                }
+                
+                
+            }
+           
+               
+
+    
+       }
     
     func loadFacebookProfileInfo()
     {
