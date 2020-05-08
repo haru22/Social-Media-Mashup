@@ -20,6 +20,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     let myRefreshControl = UIRefreshControl()
     var instagramPageID = ""
     var instagramAccountID = ""
+    var socialMediaFeeds = [SocialMediaPost]()
     
 
     @IBOutlet weak var tableView: UITableView!
@@ -112,12 +113,50 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                 if let result = result
                 {
                     print("BUSINESS DISCOVERY\n \(result)")
+                    self.instagramAPIResult = JSON(result)
+                    print("BUSINESS DISCOVERY\n \(self.instagramAPIResult)")
+                    self.instagramAppendToSocialMediaFeedsArray()
+                    print(self.instagramAPIResult["data"][2]["caption"].string ?? "nothing")
+                    
+                    
                 }
             }
             else
             {
                 print("BUSINESS DISCOVER \n \(error?.localizedDescription)")
             }
+        }
+        
+        
+    }
+    
+    func instagramAppendToSocialMediaFeedsArray()
+    {
+        let data = self.instagramAPIResult["data"]
+        let dataCount = data.count
+        var tempCounter = 0
+        
+        while(tempCounter < dataCount)
+        {
+            let post = data[tempCounter]
+            
+            self.socialMediaFeeds.append(SocialMediaPost(inputIdentifier: 2,
+                                                         inputUsername: post["username"].string ?? " ",
+                                                         inputProfileImageURL: URL(string: "hello")!,
+                                                         inputPostImageURL: URL(string: post["media_url"].string ?? " ")!, inputPostTextContent: post["caption"].string ?? " ",
+                                                         inputLikeCount: post["like_count"].int ?? 0,
+                                                         inputCommentCount: post["comments_count"].int ?? 0,
+                                                         inputContainsImage: true,
+                                                         inputTimeStamp: post["timestamp"].string ?? " "))
+            
+            tempCounter += 1
+        }
+        
+        
+        print("SOCIAL FEED ARRAY:")
+        for temp in self.socialMediaFeeds
+        {
+            print(temp.description())
         }
         
         
