@@ -161,13 +161,25 @@ class ProfileViewController: UIViewController{
         
             if(instagramAccountID != "")
             {
-                GraphRequest(graphPath: "/\(instagramAccountID)", parameters: ["fields": "followers_count, follows_count,name, profile_picture_url, media_count "], httpMethod: .get).start { (connection, result, error) in
+                GraphRequest(graphPath: "/\(instagramAccountID)", parameters: ["fields": "followers_count, follows_count,name, profile_picture_url, media_count, username "], httpMethod: .get).start { (connection, result, error) in
                     
                     if error == nil
                     {
                         if let result = result
                         {
-                            print(JSON(result))
+                            let tempJson = JSON(result)
+                            print(tempJson)
+                            
+                            //setting the image
+                            let profileImageUrl = URL(string: tempJson["profile_picture_url"].string!)
+                            self.instagramProfileImage.layer.cornerRadius = self.instagramProfileImage.frame.size.width/2
+                            self.instagramProfileImage.af.setImage(withURL: profileImageUrl!)
+                            
+                            //setting rest of user information
+                            self.instagramFollowersCount.text = String(tempJson["followers_count"].int ?? 0)
+                            self.instagramFollowingCount.text = String(tempJson["follows_count"].int ?? 0)
+                            self.instagramPostsCount.text = String(tempJson["media_count"].int ?? 0)
+                            self.instagramUserNameLabel.text = tempJson["username"].string!
                         }
                     }
                 }
