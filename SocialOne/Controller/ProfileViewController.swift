@@ -32,7 +32,7 @@ class ProfileViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //self.loadFacebookProfileInfo()
+        self.loadFacebookProfileInfo()
         self.getInstagramIDS()
         
 
@@ -61,9 +61,9 @@ class ProfileViewController: UIViewController{
               // User is logged in, do work such as go to next view controller.
           }*/
         
-          
         
-         loginManger.logIn(permissions: ["public_profile", "user_posts", "user_friends","user_photos","instagram_basic", "pages_show_list"], from: self) { (result, error) in
+        
+         loginManger.logIn(permissions: ["public_profile", "user_posts", "user_friends","user_photos"], from: self) { (result, error) in
              
              
              if let error = error {
@@ -74,8 +74,8 @@ class ProfileViewController: UIViewController{
              else
              {
                 print("Successful Login!")
-                //self.loadFacebookProfileInfo()
-                self.getInstagramIDS()
+                self.loadFacebookProfileInfo()
+                //self.getInstagramIDS()
                 return
              }
              
@@ -101,10 +101,32 @@ class ProfileViewController: UIViewController{
         
     }
     
+    @IBAction func onInstagramLoginButton(_ sender: Any)
+    {
+        
+        
+           loginManger.logIn(permissions: ["public_profile", "user_posts", "user_friends","user_photos","instagram_basic", "pages_show_list"], from: self) { (result, error) in
+               
+               
+               if let error = error {
+                 print("Failed to login: \(error.localizedDescription)")
+                 return
+               }
+          
+               else
+               {
+                  print("Successful Login!")
+                  //self.loadFacebookProfileInfo()
+                  self.getInstagramIDS()
+                  return
+               }
+    }
+    }
+    
     
     func getInstagramIDS()
     {
-        if (AccessToken.current != nil )
+        if (AccessToken.current != nil  && (AccessToken.current?.hasGranted(permission: "instagram_basic") ?? false))
         {
            
             

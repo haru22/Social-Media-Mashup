@@ -496,6 +496,9 @@
                                     <constraint firstAttribute="width" constant="20" id="c43-K3-50v"/>
                                 </constraints>
                                 <state key="normal" image="power" catalog="system"/>
+                                <connections>
+                                    <action selector="onFacebookLogOff:" destination="Tpt-0y-Kur" eventType="touchUpInside" id="Xeb-b1-aHh"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IS2-1i-Mdr">
                                 <rect key="frame" x="135" y="387" width="161" height="30"/>
@@ -508,6 +511,9 @@
                                 <state key="normal" title="Login with Instagram">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="onInstagramLoginButton:" destination="Tpt-0y-Kur" eventType="touchUpInside" id="EEY-K6-jjr"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
