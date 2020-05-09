@@ -329,8 +329,8 @@
                                 <color key="textColor" red="0.43921568630000002" green="0.43921568630000002" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="253" verticalHuggingPriority="251" text="3,210" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YtT-WM-zWf">
-                                <rect key="frame" x="55" y="684" width="53" height="22"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="253" verticalHuggingPriority="251" text="50     " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YtT-WM-zWf">
+                                <rect key="frame" x="55" y="684" width="52.5" height="22"/>
                                 <fontDescription key="fontDescription" name="Charter-Bold" family="Charter" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -346,7 +346,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="1.4M" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OyF-Df-9up">
-                                <rect key="frame" x="163" y="681" width="47" height="25"/>
+                                <rect key="frame" x="162.5" y="681" width="47" height="25"/>
                                 <fontDescription key="fontDescription" name="Charter-Bold" family="Charter" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -362,7 +362,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1,679" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pOo-lV-etU">
-                                <rect key="frame" x="276" y="681" width="55" height="25"/>
+                                <rect key="frame" x="275.5" y="681" width="55.5" height="25"/>
                                 <fontDescription key="fontDescription" name="Charter-Bold" family="Charter" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -635,6 +635,11 @@
                         <outlet property="instagramPostsCount" destination="Jjf-Ht-2CN" id="nxZ-lG-wS6"/>
                         <outlet property="instagramProfileImage" destination="nu3-bS-Oe7" id="ct5-9p-N6J"/>
                         <outlet property="instagramUserNameLabel" destination="Wgg-kU-lhq" id="EzZ-Mw-0ct"/>
+                        <outlet property="twitterFollowersCount" destination="OyF-Df-9up" id="oey-3Z-AhS"/>
+                        <outlet property="twitterFollowingCount" destination="pOo-lV-etU" id="0oY-Yr-tWt"/>
+                        <outlet property="twitterProfileImage" destination="fFB-FC-qnl" id="wE7-Xm-g05"/>
+                        <outlet property="twitterTweetsCount" destination="YtT-WM-zWf" id="7nK-1V-hyV"/>
+                        <outlet property="twitterUsernameLabel" destination="2YU-UX-pud" id="9Tg-fN-yLe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tTb-9w-cyu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1019,7 +1024,7 @@
                                             <outlet property="instagramUsername" destination="L0L-9I-TXL" id="7QD-yk-q7C"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="324" id="cjY-mo-dke">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TwitterFeedTableViewCell" rowHeight="324" id="cjY-mo-dke" customClass="TwitterFeedTableViewCell" customModule="SocialOne" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="976" width="414" height="324"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cjY-mo-dke" id="f2l-kH-h6g">
@@ -1130,6 +1135,15 @@
                                                 <constraint firstItem="Sxr-Nx-T5J" firstAttribute="top" secondItem="4mg-bA-KVB" secondAttribute="bottom" constant="8" id="zNm-1x-leu"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="commentCount" destination="Ah1-JH-BpL" id="98j-p4-r0T"/>
+                                            <outlet property="likeCount" destination="YEH-8A-8p5" id="SUl-09-3AF"/>
+                                            <outlet property="postImageContext" destination="SqG-yo-RUU" id="EWO-tp-5cj"/>
+                                            <outlet property="postTextContent" destination="Sxr-Nx-T5J" id="NJG-pL-4UM"/>
+                                            <outlet property="retweetCount" destination="J95-Fi-DKs" id="J5R-Vr-Xi3"/>
+                                            <outlet property="twitterProfileImage" destination="hup-BR-5om" id="cjc-Ia-IDY"/>
+                                            <outlet property="usernameLabel" destination="4mg-bA-KVB" id="IeN-ZK-V3P"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>

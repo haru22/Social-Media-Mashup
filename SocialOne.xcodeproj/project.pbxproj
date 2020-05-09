@@ -31,6 +31,7 @@
 		84CABE112465FD11009C469D /* InstagramFeedTwoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CABE102465FD11009C469D /* InstagramFeedTwoTableViewCell.swift */; };
 		84CABE132465FD3E009C469D /* InstagramFeedOneTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CABE122465FD3E009C469D /* InstagramFeedOneTableViewCell.swift */; };
 		84CABE15246609AA009C469D /* SocialMediaPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CABE14246609AA009C469D /* SocialMediaPost.swift */; };
+		84CABE1724672799009C469D /* TwitterFeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CABE1624672799009C469D /* TwitterFeedTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +62,7 @@
 		84CABE102465FD11009C469D /* InstagramFeedTwoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramFeedTwoTableViewCell.swift; sourceTree = "<group>"; };
 		84CABE122465FD3E009C469D /* InstagramFeedOneTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramFeedOneTableViewCell.swift; sourceTree = "<group>"; };
 		84CABE14246609AA009C469D /* SocialMediaPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialMediaPost.swift; sourceTree = "<group>"; };
+		84CABE1624672799009C469D /* TwitterFeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitterFeedTableViewCell.swift; sourceTree = "<group>"; };
 		C1B80C8D620715D2662D582F /* Pods-SocialOne.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialOne.debug.xcconfig"; path = "Target Support Files/Pods-SocialOne/Pods-SocialOne.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -162,6 +164,7 @@
 				844CD261245ECD9900721807 /* LoadingTableViewCell.swift */,
 				84CABE102465FD11009C469D /* InstagramFeedTwoTableViewCell.swift */,
 				84CABE122465FD3E009C469D /* InstagramFeedOneTableViewCell.swift */,
+				84CABE1624672799009C469D /* TwitterFeedTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -287,6 +290,7 @@
 				6DE282CE24547B4C0000ACA5 /* TwitterAPICaller.swift in Sources */,
 				844CD260245EC8E600721807 /* FacebookFeedTwoTableViewCell.swift in Sources */,
 				844CD2E42461BE8000721807 /* PostViewController.swift in Sources */,
+				84CABE1724672799009C469D /* TwitterFeedTableViewCell.swift in Sources */,
 				6DE282C624541E140000ACA5 /* RegisterViewController.swift in Sources */,
 				844CD25E245EA66900721807 /* FacebookAPICaller.swift in Sources */,
 				6DE282D3245537050000ACA5 /* InstagramCollectionViewCell.swift in Sources */,

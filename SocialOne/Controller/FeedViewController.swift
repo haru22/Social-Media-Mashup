@@ -65,19 +65,28 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @objc func initiateAPICalls()
     {
-        self.socialMediaFeeds = [SocialMediaPost]()
-        self.loaded = false
-        self.loadFromFacebook = true
-        self.loadFromInstagram = true
-        self.loadFacebookFeed()
-        print("BACK FROM LOADFACEBOOKFEED")
-            self.tableView.reloadData()
-    
-            
+          self.socialMediaFeeds = [SocialMediaPost]()
+             self.loaded = false
+             if (AccessToken.current != nil)
+             {
+                   self.loadFromFacebook = true
+                 
+                 if((AccessToken.current?.hasGranted(permission: "instagram_basic") ?? false) ==  true)
+                 {
+                     self.loadFromInstagram = true
+                 }
+                     self.loadFacebookFeed()
+             }
         
-        
-        
-          self.myRefreshControl.endRefreshing()
+            // self.loadFacebookFeed()
+             print("BACK FROM LOADFACEBOOKFEED")
+                 self.tableView.reloadData()
+         
+                 
+             
+             
+             
+               self.myRefreshControl.endRefreshing()
         
         
     }

@@ -25,6 +25,16 @@ class ProfileViewController: UIViewController{
     @IBOutlet weak var instagramFollowersCount: UILabel!
     @IBOutlet weak var instagramFollowingCount: UILabel!
     
+    
+    @IBOutlet weak var twitterProfileImage: UIImageView!
+    @IBOutlet weak var twitterUsernameLabel: UILabel!
+    @IBOutlet weak var twitterTweetsCount: UILabel!
+    @IBOutlet weak var twitterFollowersCount: UILabel!
+    @IBOutlet weak var twitterFollowingCount: UILabel!
+    
+    
+    
+    
     var instagramPageID: String = ""
     var  instagramAccountID: String = ""
     
@@ -94,10 +104,14 @@ class ProfileViewController: UIViewController{
         TwitterAPICaller.client?.login(url: myUrl, success: {
             
             print("log in sucessfully to twitter")
-            self.performSegue(withIdentifier: "backFromTwitter", sender: self)
+           
+           
         }, failure: { (Error) in
             print("falide to sign in to twitter\n]=\(Error.localizedDescription)")
+            
         })
+        
+        self.loadTwitterProfileInfo()
         
     }
     
@@ -213,6 +227,21 @@ class ProfileViewController: UIViewController{
 
     
        }
+    
+    
+    func loadTwitterProfileInfo()
+    {
+        let profilePicUrl = URL(string: "https://graph.facebook.com/100050907580297/picture?type=small")!
+        self.twitterProfileImage.layer.cornerRadius = self.twitterProfileImage.frame.size.width/2
+        self.twitterProfileImage.af.setImage(withURL: profilePicUrl)
+        self.twitterTweetsCount.text  = "20     "
+        self.twitterFollowersCount.text = "90"
+        self.twitterFollowingCount.text = "100"
+        self.twitterUsernameLabel.text = "@kevinorellana2"
+        
+   
+        
+    }
     
     func loadFacebookProfileInfo()
     {
