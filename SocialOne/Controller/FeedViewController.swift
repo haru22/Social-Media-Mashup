@@ -189,6 +189,19 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         {
             let post = data[tempCounter]
             
+            if(tempCounter == 1)
+            {
+                self.socialMediaFeeds.append(SocialMediaPost(inputIdentifier: 2,
+                inputUsername: post["username"].string ?? " ",
+                inputProfileImageURL: profileImageUrl,
+                inputPostImageURL: URL(string: post["media_url"].string ?? " ")!, inputPostTextContent: post["caption"].string ?? " ",
+                inputLikeCount: post["like_count"].int ?? 0,
+                inputCommentCount: post["comments_count"].int ?? 0,
+                inputContainsImage: true,
+                inputTimeStamp: dateFormatter.date(from: "2020-05-09T09:51:16+0000")!))
+            }
+            else
+            {
             self.socialMediaFeeds.append(SocialMediaPost(inputIdentifier: 2,
                                                          inputUsername: post["username"].string ?? " ",
                                                          inputProfileImageURL: profileImageUrl,
@@ -197,7 +210,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                                                          inputCommentCount: post["comments_count"].int ?? 0,
                                                          inputContainsImage: true,
                                                          inputTimeStamp: dateFormatter.date(from: post["timestamp"].string!)!))
-            
+            }
             tempCounter += 1
         }
         
