@@ -24,6 +24,14 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     var loadFromFacebook = false
     var loadFromInstagram = false
     var loadFromTwitter = false
+    
+    let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
+        formatter.timeZone = TimeZone.current
+        return formatter
+        
+    } ()
 
 
     @IBOutlet weak var tableView: UITableView!
@@ -188,7 +196,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                                                          inputLikeCount: post["like_count"].int ?? 0,
                                                          inputCommentCount: post["comments_count"].int ?? 0,
                                                          inputContainsImage: true,
-                                                         inputTimeStamp: post["timestamp"].string ?? " "))
+                                                         inputTimeStamp: dateFormatter.date(from: post["timestamp"].string!)!))
             
             tempCounter += 1
         }
@@ -279,6 +287,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         var index: Int = 0
         let userId = (AccessToken.current?.userID)!
         //print("INSIDE APENDING")// count \(datacount) \n\(data[0])")
+
         
         while(index < datacount)
         {
@@ -294,8 +303,8 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                                                                  inputUsername: post["from"]["name"].string ?? "Unknown", inputProfileImageURL: URL(string:"https://graph.facebook.com/\(userId)/picture?type=small")!,
                                                                  inputPostImageURL: URL(string: "none")!,
                                                                  inputPostTextContent: post["message"].string ?? "", inputLikeCount: 0, inputCommentCount: 0, inputContainsImage: false,
-                                                                 inputTimeStamp: post["created_time"].string ?? ""))
-                }
+                                                                 inputTimeStamp: dateFormatter.date(from: post["created_time"].string!)!))
+        }
                 else
                 {
                       //print("\n\(post)\n")
@@ -303,7 +312,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                                                                  inputUsername: post["from"]["name"].string ?? "Unknown", inputProfileImageURL: URL(string:"https://graph.facebook.com/\(userId)/picture?type=small")!,
                                                                  inputPostImageURL: URL(string: post["full_picture"].string!)!,
                                                                  inputPostTextContent: post["message"].string ?? "", inputLikeCount: 0, inputCommentCount: 0, inputContainsImage: true,
-                                                                 inputTimeStamp: post["created_time"].string ?? ""))
+                                                                 inputTimeStamp: dateFormatter.date(from: post["created_time"].string!)!))
                     
                 }
             }
@@ -351,6 +360,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         if(loaded)
         {
+            self.socialMediaFeeds  = self.socialMediaFeeds.sorted(by: {$0.timeStamp > $1.timeStamp})
             let post = self.socialMediaFeeds[indexPath.row]
             if(post.identifier == 1)
             {

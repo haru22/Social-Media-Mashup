@@ -19,9 +19,8 @@ class SocialMediaPost
     var likeCount : Int
     var commentCount: Int
     var containsImage: Bool
-    var timeStamp: String
-    
-    init(inputIdentifier: Int, inputUsername: String, inputProfileImageURL: URL, inputPostImageURL: URL, inputPostTextContent: String, inputLikeCount: Int, inputCommentCount: Int, inputContainsImage: Bool, inputTimeStamp: String)
+    var timeStamp: Date
+    init(inputIdentifier: Int, inputUsername: String, inputProfileImageURL: URL, inputPostImageURL: URL, inputPostTextContent: String, inputLikeCount: Int, inputCommentCount: Int, inputContainsImage: Bool, inputTimeStamp: Date)
     {
         self.identifier = inputIdentifier
         self.userName = inputUsername

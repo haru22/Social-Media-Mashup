@@ -32,8 +32,8 @@ class ProfileViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       // self.loadFacebookProfileInfo()
-       // self.getInstagramIDS()
+       self.loadFacebookProfileInfo()
+       self.getInstagramIDS()
         
 
         // Do any additional setup after loading the view.
