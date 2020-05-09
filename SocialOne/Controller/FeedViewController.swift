@@ -74,6 +74,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                  if((AccessToken.current?.hasGranted(permission: "instagram_basic") ?? false) ==  true)
                  {
                      self.loadFromInstagram = true
+                    self.loadFromTwitter = true
                  }
                      self.loadFacebookFeed()
              }
@@ -120,7 +121,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                                          let temp = JSON(result)
                                         self.instagramAccountID = temp["instagram_business_account"]["id"].string!
                                         
-                                        print("Information from instagram account \(self.instagramAccountID): \(temp)")
+                                            //print("Information from instagram account \(self.instagramAccountID): \(temp)")
                                         self.loadInstagramFeed()
                                      }
                                  }
@@ -153,16 +154,16 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             {
                 if let result = result
                 {
-                    print("BUSINESS DISCOVERY\n \(result)")
+                    //print("BUSINESS DISCOVERY\n \(result)")
                     self.instagramAPIResult = JSON(result)
-                    print("BUSINESS DISCOVERY\n \(self.instagramAPIResult)")
+                   // print("BUSINESS DISCOVERY\n \(self.instagramAPIResult)")
                     
                     GraphRequest(graphPath: "/\(self.instagramAccountID)", parameters: ["fields": "profile_picture_url"], httpMethod: .get).start { (connection, result, error) in
                         
                         if error == nil
                         {
                             let tempJson = JSON(result)
-                            print("PROFILE URL JSON \n\(tempJson)")
+                           // print("PROFILE URL JSON \n\(tempJson)")
                             let profileImageUrl = URL(string: tempJson["profile_picture_url"].string!)!
                             self.instagramAppendToSocialMediaFeedsArray(profileImageUrl: profileImageUrl)
                                             
@@ -225,15 +226,13 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         
         print("SOCIAL FEED ARRAY:")
-        for temp in self.socialMediaFeeds
-        {
-            print(temp.description())
-        }
+        
+
         
         self.loaded = true
         if(self.loadFromTwitter == true)
         {
-            print("Load from instagram")
+            self.twitterAppendToSocialMediaFeeds()
         }
         else
         {
@@ -245,6 +244,25 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
           
+    func twitterAppendToSocialMediaFeeds()
+    {
+        
+        self.socialMediaFeeds.append(SocialMediaPost(inputIdentifier: 3, inputUsername: "@kevinorellana2", inputProfileImageURL: URL(string: "https://graph.facebook.com/100050907580297/picture?type=small")!, inputPostImageURL: URL(string: "none")!, inputPostTextContent: "One more week and I will be done with my second semester at SJSU #SpartanUP#SJSU", inputLikeCount: 40, inputCommentCount: 3, inputContainsImage: false, inputTimeStamp: dateFormatter.date(from: "2020-05-09T03:51:16+0000")!))
+        
+        
+        self.socialMediaFeeds.append(SocialMediaPost(inputIdentifier: 3, inputUsername: "@kevinorellana2", inputProfileImageURL: URL(string: "https://graph.facebook.com/100050907580297/picture?type=small")!, inputPostImageURL: URL(string: "none")!, inputPostTextContent: "Making progress on my social media project. Hopefully it will be online soon!", inputLikeCount: 40, inputCommentCount: 3, inputContainsImage: false, inputTimeStamp: dateFormatter.date(from: "2020-03-09T03:51:16+0000")!))
+        
+        for temp in self.socialMediaFeeds
+        {
+            print(temp.description())
+        }
+        self.loaded = true
+        self.tableView.reloadData()
+        
+        
+        
+    }
+    
     
     /*
      This function loads all the posts from the user's facebook feed and stores it on "apiResult"
@@ -384,6 +402,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         {
             self.socialMediaFeeds  = self.socialMediaFeeds.sorted(by: {$0.timeStamp > $1.timeStamp})
             let post = self.socialMediaFeeds[indexPath.row]
+            print("Post identifier \(post.identifier)")
             if(post.identifier == 1)
             {
                 if(post.containsImage)
@@ -410,7 +429,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                 }
             }
             
-            if(post.identifier == 2)
+            else if(post.identifier == 2)
             {
                 if(self.socialMediaFeeds[indexPath.row].containsImage)
                 {
@@ -426,6 +445,20 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                     
                     return cell
                 }
+            }
+            else
+            {
+                
+                let cell = tableView.dequeueReusableCell(withIdentifier: "TwitterFeedTableViewCell") as! TwitterFeedTableViewCell
+                
+                cell.commentCount.text = String(post.commentCount)
+                cell.likeCount.text = String(post.likeCount)
+                cell.retweetCount.text = "4"
+                cell.postTextContent.text = post.postTextContent
+                cell.twitterProfileImage.layer.cornerRadius = cell.twitterProfileImage.frame.size.width/2
+                cell.twitterProfileImage.af.setImage(withURL: post.profileImageURL)
+                
+                return cell
             }
             
             /*

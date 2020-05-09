@@ -37,7 +37,7 @@ class SocialMediaPost
     public func description() -> String
     {
         
-        return "SocialFeed\n\(self.identifier)\n\(self.userName)\n\(self.profileImageURL)\n\(self.postImageURL)\n\(self.postTextContent)\n\(self.likeCount)\n\(self.commentCount)\n\(self.containsImage)\n\(self.timeStamp)"
+        return "SocialFeed\n\(self.identifier)\n\(self.userName)\n\(self.profileImageURL)\n\(self.postImageURL)\n\(self.postTextContent)\n\(self.likeCount)\n\(self.commentCount)\n\(self.containsImage)\n\(self.timeStamp)\n\n"
         
     }
     
