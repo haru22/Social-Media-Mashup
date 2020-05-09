@@ -21,7 +21,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     var instagramPageID = ""
     var instagramAccountID = ""
     var socialMediaFeeds = [SocialMediaPost]()
-    
+
 
     @IBOutlet weak var tableView: UITableView!
 
@@ -33,8 +33,8 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.delegate = self
         tableView.dataSource = self
         
-        //loadFacebookFeed()
-        getInstagramIDS()
+        loadFacebookFeed()
+        //getInstagramIDS()
         
         //implementing "pull down to refresh"
         myRefreshControl.addTarget(self, action: #selector(loadFacebookFeed), for: .valueChanged)
@@ -48,6 +48,16 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidAppear(animated)
 
 
+        
+    }
+    
+    func initiateAPICalls()
+    {
+        if(AccessToken.current != nil)
+        {
+            
+        }
+        
         
     }
 
@@ -79,6 +89,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                                      {
                                          let temp = JSON(result)
                                         self.instagramAccountID = temp["instagram_business_account"]["id"].string!
+                                        
                                         print("Information from instagram account \(self.instagramAccountID): \(temp)")
                                         self.loadInstagramFeed()
                                      }
@@ -115,8 +126,25 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                     print("BUSINESS DISCOVERY\n \(result)")
                     self.instagramAPIResult = JSON(result)
                     print("BUSINESS DISCOVERY\n \(self.instagramAPIResult)")
-                    self.instagramAppendToSocialMediaFeedsArray()
-                    print(self.instagramAPIResult["data"][2]["caption"].string ?? "nothing")
+                    
+                    GraphRequest(graphPath: "/\(self.instagramAccountID)", parameters: ["fields": "profile_picture_url"], httpMethod: .get).start { (connection, result, error) in
+                        
+                        if error == nil
+                        {
+                            let tempJson = JSON(result)
+                            print("PROFILE URL JSON \n\(tempJson)")
+                            let profileImageUrl = URL(string: tempJson["profile_picture_url"].string!)!
+                            self.instagramAppendToSocialMediaFeedsArray(profileImageUrl: profileImageUrl)
+                                            
+                            
+                        }
+                        
+                        else
+                        {
+                            print(error?.localizedDescription)
+                        }
+                    }
+                
                     
                     
                 }
@@ -130,7 +158,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         
     }
     
-    func instagramAppendToSocialMediaFeedsArray()
+    func instagramAppendToSocialMediaFeedsArray(profileImageUrl: URL)
     {
         let data = self.instagramAPIResult["data"]
         let dataCount = data.count
@@ -142,7 +170,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             self.socialMediaFeeds.append(SocialMediaPost(inputIdentifier: 2,
                                                          inputUsername: post["username"].string ?? " ",
-                                                         inputProfileImageURL: URL(string: "hello")!,
+                                                         inputProfileImageURL: profileImageUrl,
                                                          inputPostImageURL: URL(string: post["media_url"].string ?? " ")!, inputPostTextContent: post["caption"].string ?? " ",
                                                          inputLikeCount: post["like_count"].int ?? 0,
                                                          inputCommentCount: post["comments_count"].int ?? 0,
@@ -159,6 +187,9 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             print(temp.description())
         }
         
+        loaded = true
+        tableView.reloadData()
+        
         
     }
     
@@ -169,6 +200,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
      */
     @objc func loadFacebookFeed()
     {
+        
         
         if (AccessToken.current != nil)
         {
@@ -184,17 +216,20 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         
                   
                   
-            let request = GraphRequest(graphPath: "/me/feed", parameters: ["fields":"name, from, message, full_picture" ], httpMethod: .get)
+            let request = GraphRequest(graphPath: "/me/feed", parameters: ["fields":"name, from, message, full_picture, created_time" ], httpMethod: .get)
             
             request.start(completionHandler: { connection, result, error in
                 if error == nil
                       {
                           
                         self.facebookAPIResult = JSON(result)
-                        //print("Json Facebook Feed Result new\n \(self.apiResult)")
+                        print("Json Facebook Feed Result new\n \(self.facebookAPIResult)")
+                        print("User ID \((AccessToken.current?.userID)!)")
+                        self.facebookAppendToSocialMediaFeeds()
                        // print("IMage URl: \(self.apiResult["data"][0]["full_picture"].string ?? "false")")
-                        self.loaded = true
-                        self.tableView.reloadData()
+                        //self.loaded = true
+                        
+                        //self.tableView.reloadData()
 
                       }
                   })
@@ -206,10 +241,56 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.tableView.reloadData()
         }
         
-        
+         
         //print("AT THE END OF PROFILE USER")
         self.myRefreshControl.endRefreshing()
                // self.tableView.reloadData()
+
+        
+    }
+    
+    func facebookAppendToSocialMediaFeeds()
+    {
+        
+        var data = self.facebookAPIResult["data"]
+        var datacount = data.count
+        var index = 0
+        let userId = (AccessToken.current?.userID)!
+        while(index < datacount)
+        {
+            let post = data[index]
+            print("FUll pic: \(post["full_picture"].string)  Message \(post["message"].string != nil)")
+            if(post["full_picture"].string != nil && post["message"].string != nil)
+            {
+                if(post["full_picture"].string == nil)
+                {
+                    self.socialMediaFeeds.append(SocialMediaPost(inputIdentifier: 1,
+                                                                 inputUsername: post["from"]["name"].string ?? "Unknown", inputProfileImageURL: URL(string:"https://graph.facebook.com/\(userId)/picture?type=small")!,
+                                                                 inputPostImageURL: URL(string: "none")!,
+                                                                 inputPostTextContent: post["message"].string ?? "", inputLikeCount: 0, inputCommentCount: 0, inputContainsImage: false,
+                                                                 inputTimeStamp: post["created_time"].string ?? ""))
+                }
+                else
+                {
+                    self.socialMediaFeeds.append(SocialMediaPost(inputIdentifier: 1,
+                                                                 inputUsername: post["from"]["name"].string ?? "Unknown", inputProfileImageURL: URL(string:"https://graph.facebook.com/\(userId)/picture?type=small")!,
+                                                                 inputPostImageURL: URL(string: post["full_picture"].string!)!,
+                                                                 inputPostTextContent: post["message"].string ?? "", inputLikeCount: 0, inputCommentCount: 0, inputContainsImage: true,
+                                                                 inputTimeStamp: post["created_time"].string ?? ""))
+                    
+                }
+            }
+            index += 1
+        }
+       
+        print("SOCIAL FEED ARRAY:")
+          for temp in self.socialMediaFeeds
+          {
+              print(temp.description())
+          }
+        // loaded = true
+        //tableView.reloadData()
+        
         
     }
 
@@ -219,7 +300,8 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if(loaded)
         {
-            return self.facebookAPIResult["data"].count
+            return self.socialMediaFeeds.count
+            // return self.facebookAPIResult["data"].count
         }
         
         return 1
@@ -231,6 +313,31 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         if(loaded)
         {
+            let post = self.socialMediaFeeds[indexPath.row]
+            if(post.identifier == 1)
+            {
+                
+            }
+            
+            if(post.identifier == 2)
+            {
+                if(self.socialMediaFeeds[indexPath.row].containsImage)
+                {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "InstagramFeedOneTableViewCell") as! InstagramFeedOneTableViewCell
+                    
+                    cell.instagramUsername.text = self.socialMediaFeeds[indexPath.row].userName
+                    cell.instagramImageContent.af.setImage(withURL: self.socialMediaFeeds[indexPath.row].postImageURL)
+                    cell.instagramCommentsCountLabel.text = String(self.socialMediaFeeds[indexPath.row].commentCount)
+                    cell.instagramLikesCountLabel.text = String(self.socialMediaFeeds[indexPath.row].likeCount)
+                    cell.instagramPostContent.text = self.socialMediaFeeds[indexPath.row].postTextContent
+                    cell.instagramProfilePicture.layer.cornerRadius = cell.instagramProfilePicture.frame.size.width/2
+                    cell.instagramProfilePicture.af.setImage(withURL: self.socialMediaFeeds[indexPath.row].profileImageURL)
+                    
+                    return cell
+                }
+            }
+            
+            /*
             if(self.facebookAPIResult["data"][indexPath.row]["full_picture"].string == nil)//if post does not contain an post image
             {
                 let userId = facebookAPIResult["data"][indexPath.row]["from"]["id"].string ?? ""
@@ -261,6 +368,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                 return cell
                 
             }
+        */
         }
         
         return tableView.dequeueReusableCell(withIdentifier: "LoadingTableViewCell") as! LoadingTableViewCell

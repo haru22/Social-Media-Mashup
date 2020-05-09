@@ -907,7 +907,7 @@
                                             <outlet property="instagramUsername" destination="vXY-OJ-HI8" id="5rp-E6-AYI"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="324" id="ieI-v5-ZEX" customClass="InstagramFeedOneTableViewCell" customModule="SocialOne" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="InstagramFeedOneTableViewCell" rowHeight="324" id="ieI-v5-ZEX" customClass="InstagramFeedOneTableViewCell" customModule="SocialOne" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="652" width="414" height="324"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ieI-v5-ZEX" id="3es-nc-PsK">
