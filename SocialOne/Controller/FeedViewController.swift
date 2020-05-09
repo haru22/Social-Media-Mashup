@@ -247,7 +247,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     func twitterAppendToSocialMediaFeeds()
     {
         
-        self.socialMediaFeeds.append(SocialMediaPost(inputIdentifier: 3, inputUsername: "@kevinorellana2", inputProfileImageURL: URL(string: "https://graph.facebook.com/100050907580297/picture?type=small")!, inputPostImageURL: URL(string: "none")!, inputPostTextContent: "One more week and I will be done with my second semester at SJSU #SpartanUP#SJSU", inputLikeCount: 40, inputCommentCount: 3, inputContainsImage: false, inputTimeStamp: dateFormatter.date(from: "2020-05-09T03:51:16+0000")!))
+        self.socialMediaFeeds.append(SocialMediaPost(inputIdentifier: 3, inputUsername: "@kevinorellana2", inputProfileImageURL: URL(string: "https://graph.facebook.com/100050907580297/picture?type=small")!, inputPostImageURL: URL(string: "none")!, inputPostTextContent: "One more week and I will be done with my second semester at SJSU #SpartanUP#SJSU", inputLikeCount: 25, inputCommentCount: 16, inputContainsImage: false, inputTimeStamp: dateFormatter.date(from: "2020-05-09T10:51:16+0000")!))
         
         
         self.socialMediaFeeds.append(SocialMediaPost(inputIdentifier: 3, inputUsername: "@kevinorellana2", inputProfileImageURL: URL(string: "https://graph.facebook.com/100050907580297/picture?type=small")!, inputPostImageURL: URL(string: "none")!, inputPostTextContent: "Making progress on my social media project. Hopefully it will be online soon!", inputLikeCount: 40, inputCommentCount: 3, inputContainsImage: false, inputTimeStamp: dateFormatter.date(from: "2020-03-09T03:51:16+0000")!))
