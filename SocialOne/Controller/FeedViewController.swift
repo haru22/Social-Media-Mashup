@@ -21,6 +21,9 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     var instagramPageID = ""
     var instagramAccountID = ""
     var socialMediaFeeds = [SocialMediaPost]()
+    var loadFromFacebook = false
+    var loadFromInstagram = false
+    var loadFromTwitter = false
 
 
     @IBOutlet weak var tableView: UITableView!
@@ -33,11 +36,12 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.delegate = self
         tableView.dataSource = self
         
-        loadFacebookFeed()
+        initiateAPICalls()
+        //loadFacebookFeed()
         //getInstagramIDS()
         
         //implementing "pull down to refresh"
-        myRefreshControl.addTarget(self, action: #selector(loadFacebookFeed), for: .valueChanged)
+        myRefreshControl.addTarget(self, action: #selector(initiateAPICalls), for: .valueChanged)
         tableView.refreshControl = myRefreshControl
         
      
@@ -51,12 +55,21 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         
     }
     
-    func initiateAPICalls()
+    @objc func initiateAPICalls()
     {
-        if(AccessToken.current != nil)
-        {
+        self.socialMediaFeeds = [SocialMediaPost]()
+        self.loaded = false
+        self.loadFromFacebook = true
+        self.loadFromInstagram = true
+        self.loadFacebookFeed()
+        print("BACK FROM LOADFACEBOOKFEED")
+            self.tableView.reloadData()
+    
             
-        }
+        
+        
+        
+          self.myRefreshControl.endRefreshing()
         
         
     }
@@ -187,8 +200,16 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             print(temp.description())
         }
         
-        loaded = true
-        tableView.reloadData()
+        self.loaded = true
+        if(self.loadFromTwitter == true)
+        {
+            print("Load from instagram")
+        }
+        else
+        {
+            self.tableView.reloadData()
+        }
+       // tableView.reloadData()
         
         
     }
@@ -200,7 +221,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
      */
     @objc func loadFacebookFeed()
     {
-        
+        print("INSIDE LOAD FACEBOOK FEED")
         
         if (AccessToken.current != nil)
         {
@@ -223,8 +244,8 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                       {
                           
                         self.facebookAPIResult = JSON(result)
-                        print("Json Facebook Feed Result new\n \(self.facebookAPIResult)")
-                        print("User ID \((AccessToken.current?.userID)!)")
+                        //print("Json Facebook Feed Result new\n \(self.facebookAPIResult)")
+                        //print("User ID \((AccessToken.current?.userID)!)")
                         self.facebookAppendToSocialMediaFeeds()
                        // print("IMage URl: \(self.apiResult["data"][0]["full_picture"].string ?? "false")")
                         //self.loaded = true
@@ -237,13 +258,14 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         else
         {
+            print("MAKING LOADED FALSE")
             loaded = false
             self.tableView.reloadData()
         }
         
          
         //print("AT THE END OF PROFILE USER")
-        self.myRefreshControl.endRefreshing()
+      
                // self.tableView.reloadData()
 
         
@@ -251,19 +273,23 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func facebookAppendToSocialMediaFeeds()
     {
-        
-        var data = self.facebookAPIResult["data"]
-        var datacount = data.count
-        var index = 0
+        print("FACEBOOK  APPEND TO SOCIAL MEDIA FEEDS")
+        let data = self.facebookAPIResult["data"]
+        let datacount = data.count
+        var index: Int = 0
         let userId = (AccessToken.current?.userID)!
+        //print("INSIDE APENDING")// count \(datacount) \n\(data[0])")
+        
         while(index < datacount)
         {
             let post = data[index]
-            print("FUll pic: \(post["full_picture"].string)  Message \(post["message"].string != nil)")
-            if(post["full_picture"].string != nil && post["message"].string != nil)
+            //print("POST \(post)")
+            //print("FUll pic: \(post["full_picture"].string != nil)  Message \(post["message"].string != nil)\n\n")
+            if(post["full_picture"].string != nil || post["message"].string != nil)
             {
                 if(post["full_picture"].string == nil)
                 {
+                   // print("\n\(post)\n")
                     self.socialMediaFeeds.append(SocialMediaPost(inputIdentifier: 1,
                                                                  inputUsername: post["from"]["name"].string ?? "Unknown", inputProfileImageURL: URL(string:"https://graph.facebook.com/\(userId)/picture?type=small")!,
                                                                  inputPostImageURL: URL(string: "none")!,
@@ -272,6 +298,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                 }
                 else
                 {
+                      //print("\n\(post)\n")
                     self.socialMediaFeeds.append(SocialMediaPost(inputIdentifier: 1,
                                                                  inputUsername: post["from"]["name"].string ?? "Unknown", inputProfileImageURL: URL(string:"https://graph.facebook.com/\(userId)/picture?type=small")!,
                                                                  inputPostImageURL: URL(string: post["full_picture"].string!)!,
@@ -280,16 +307,27 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                     
                 }
             }
+            
             index += 1
         }
        
-        print("SOCIAL FEED ARRAY:")
+        /*
+        print("SOCIAL FEED ARRAY: count: \(self.socialMediaFeeds.count)")
           for temp in self.socialMediaFeeds
           {
               print(temp.description())
-          }
-        // loaded = true
-        //tableView.reloadData()
+          }*/
+        print("OUTSIDE OF LOOP")
+        self.loaded = true
+        if(self.loadFromInstagram == true)
+        {
+            self.getInstagramIDS()
+        }
+        else
+        {
+            tableView.reloadData()
+        }
+            //tableView.reloadData()
         
         
     }
@@ -316,7 +354,28 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             let post = self.socialMediaFeeds[indexPath.row]
             if(post.identifier == 1)
             {
-                
+                if(post.containsImage)
+                {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "FacebookFeedTableViewCell") as! FacebookFeedTableViewCell
+                    
+                    cell.postContentLabel.text = post.postTextContent
+                    cell.usernameLabel.text = post.userName
+                    cell.postImage.af.setImage(withURL: post.postImageURL)
+                    cell.profileImage.layer.cornerRadius = cell.profileImage.frame.size.width/2
+                    cell.profileImage.af.setImage(withURL: post.profileImageURL)
+                    return cell
+                }
+                else
+                {
+                    
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "FacebookFeedTwoTableViewCell") as! FacebookFeedTwoTableViewCell
+                    cell.usernameLabel.text = post.userName
+                    cell.postContent.text = post.postTextContent
+                    cell.profileImage.layer.cornerRadius = cell.profileImage.frame.size.width/2
+                    cell.profileImage.af.setImage(withURL: post.profileImageURL)
+                    
+                    return cell
+                }
             }
             
             if(post.identifier == 2)
