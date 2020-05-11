@@ -182,6 +182,7 @@ Facebook API
 
 <img src= "https://recordit.co/Sf1oIieLTz.gif" width=250>
 
+## Final App Walkthrough
 <img src= "http://g.recordit.co/nXGw7B4yis.gif" width=250>
 
 
